@@ -30,7 +30,7 @@ RSpec.describe Artist do
       @artist.songs << 
       @artist.save
     }
-    expect(@artists.songs.count).to eq(10)
+    expect(@artist.songs.count).to eq(10)
 
   end
 
