@@ -11,17 +11,18 @@ RSpec.describe 'routing' do
   end
 
   it 'root should route to home path' do
-  byebug
     expect(:get => '/').to route_to(:controller => "search", :action => "home")
   end
 
-  # it 'should only accept GET requests for home' do
+  it 'should only accept GET requests for home' do
+    expect(:post => '/home').not_to be_routable
+  end
 
-  # end
+  it 'routes to /search' do
+    expect(:post => '/search').to be_routable
+  end
 
-  # it 'should route queries to search#search' do
-
-  # end
+  
 
   # it 'The search action should only accept post requests' do
 
