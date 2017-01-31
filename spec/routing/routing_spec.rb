@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-Rspec.describe 'routing' do 
+RSpec.describe 'routing' do 
 
   it 'should have a home action' do
 
