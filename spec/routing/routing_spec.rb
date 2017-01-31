@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'routing' do 
 
   it 'should have a home action' do
+    expect(:get => home_path).to route_to(:controller => "search", :action => "home")
 
   end
 
