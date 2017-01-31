@@ -27,7 +27,7 @@ RSpec.describe Artist do
   it 'An artist can have many songs' do
     10.times { Song.create(name: Faker::Name.name)}
     Song.all.each{|s|
-      @artist.songs << 
+      @artist.songs << s
       @artist.save
     }
     expect(@artist.songs.count).to eq(10)
