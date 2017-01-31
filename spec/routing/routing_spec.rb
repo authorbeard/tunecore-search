@@ -23,7 +23,7 @@ RSpec.describe 'routing' do
   end
 
   it 'has a search_path' do
-    expect(:post => search_path).to route_to(:controller => "search", :action => "home")
+    expect(:post => search_path).to route_to(:controller => "search", :action => "search")
   end
 
   # it 'The search action should only accept post requests' do
