@@ -30,11 +30,5 @@ RSpec.describe 'routing' do
     expect(:get => search_path).to_not be_routable
   end
 
-  # it 'The search action should respond to json by default' do
-
-  # end
-
-
-
 
 end
