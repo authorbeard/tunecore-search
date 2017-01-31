@@ -9,7 +9,8 @@ RSpec.describe Artist do
 
   it 'An artist can have many albums' do
     artist = Artist.create(name: "David Bowie")
-    expect(artist.albums << Album.new(name: "Black Star")).not_to raise_error
+    artist.albums << Album.new(name: "Black Star")
+    expect(artist.albums.count).to eq(1)
   end
 
 
