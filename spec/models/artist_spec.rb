@@ -11,13 +11,11 @@ RSpec.describe Artist do
   end
 
   it 'An artist can have an album' do
-    # artist = Artist.create(name: "David Bowie")
-    @artist.albums << Album.new(name: "Black Star")
+    @artist.albums << Album.create(name: "Black Star")
     expect(@artist.albums.count).to eq(1)
   end
 
   it 'An artist can have many albums' do
-    # artist=Artist.create(name: Faker::Name.name)
     10.times{ Album.create(name: Faker::Name.name)}
     Album.all.each{|a| 
       @artist.albums << a
@@ -27,7 +25,13 @@ RSpec.describe Artist do
   end
 
   it 'An artist can have many songs' do
-    assert false
+    10.times { Song.create(name: Faker::Name.name)}
+    Song.all.each{|s|
+      @artist.songs << 
+      @artist.save
+    }
+    expect(@artists.songs.count).to eq(10)
+
   end
 
 
