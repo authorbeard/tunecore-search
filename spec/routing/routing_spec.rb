@@ -26,9 +26,9 @@ RSpec.describe 'routing' do
     expect(:post => search_path).to route_to(:controller => "search", :action => "search")
   end
 
-  # it 'The search action should only accept post requests' do
-
-  # end
+  it 'The search action should only accept post requests' do
+    expect(:get => search_path).to_not be_routable
+  end
 
   # it 'The search action should respond to json by default' do
 
