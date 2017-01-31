@@ -30,10 +30,10 @@ RSpec.describe Artist do
       @artist.songs << s
       @artist.save
     }
-    byebug
     expect(@artist.songs.count).to eq(10)
-
   end
+
+
 
 
 
