@@ -15,13 +15,11 @@ RSpec.describe Album do
     expect(@album.artist).to_not be(nil) 
   end
 
-  it 'An album can have many albums' do
-    10.times{ Album.create(name: Faker::Name.name)}
-    Album.all.each{|a| 
-      @album.albums << a
-      @album.save
-      }
-    expect(@album.albums.count).to eq(10)
+  it 'Can have songs' do
+    10.times{ Song.create(name: Faker::Commerce.product_name)}
+    @album.songs << Song.all
+    @album.save
+    expect(@album.songs.count).to eq(10)
   end
 
   it 'An album can have many songs' do
