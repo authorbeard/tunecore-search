@@ -25,14 +25,14 @@ RSpec.describe "search/home.html.erb" do
     end
 
     context "Query Input field & label" do
-      it "Has a form group for the search box & label" do
+      it "Groups input field, label & button in a form-group" do
         search = page.find('.container form#search-form')
         expect(search).to have_css('div.form-group')
       end
 
       it "Places the form group in a row" do
         search = page.find('div.container form#search-form')
-        expect(search).to have_css('.form-group.row')
+        expect(search).to have_css('.row')
       end
 
       context "Label" do
@@ -41,10 +41,9 @@ RSpec.describe "search/home.html.erb" do
           expect(search).to have_css('label', :count => 1)
         end
 
-        it "The label has responsive classes for column, field reference" do
+        it "The label is responsive but always stacks atop the search box" do
           search = page.find('div#search-input-group')
-          expect(search).to have_css('label.col-xs-2.col-form-label')
-          expect(search).to have_css('label[for=query-string]', :count=>1)
+          expect(search).to have_css('label.col-xs-4.col-form-label')
         end
 
         it "The label refers to the keyword input field box" do
@@ -74,6 +73,54 @@ RSpec.describe "search/home.html.erb" do
           expect(search).to have_css('input[for=query-string]')
           expect(search).to have_css('#query-string')
         end
+
+        it "Has some placeholder text" do
+          # search=page.find('input.form-control')
+          expect(page).to have_selector("input[placeholder='Enter your search text here']")
+        end
+      end
+
+      context "Search Button" do 
+        it "The page has one submit button" do
+          search = page.find("div#search-input-group")
+          expect(search).to have_css("button[type=submit]", :count=>1)
+        end
+
+        it "The button is not in the same row as the input field" do
+          search = page.find("div#search-input-group")
+          expect(search.has_no_button?).to be(true)
+        end
+
+        it "The button is in its own row" do
+          search = page.find("div.form-group")
+          expect(search.inspect[1]).to be("div.form-group")
+          expect(search.inspect[1].has_button?).to be(true)
+        end
+      end
+
+      context "Search Options" do
+        it "Has search options" do
+          expect(page).to have_selector("fieldset", :count=>1)
+        end
+
+        it "Informs the user that there are options for the search" do
+          opts = page.find("fieldset")
+          expect(opts).to have_selector("legend")
+          expect(opts.find("legend")).to have_content
+        end
+
+        it "Does not display options unless a button is clicked" do
+          opts = page.find("fieldset div#search-options")
+          expect(page).to have_selector("div#search-options", :visible => false)
+        end
+
+        it "Has a button to display search options" do
+          expect(page).to have_css("i.fa-plus-circle")
+        end 
+
+        it "Defaults to search across Song, Artist & Album names" do
+
+        end 
 
       end
 
