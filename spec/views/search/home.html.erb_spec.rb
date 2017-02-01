@@ -13,8 +13,11 @@ RSpec.describe "search/home.html.erb" do
     expect(page).to have_css('div.instructions')
   end
 
-  # it "Explains the options" do
-  # end
+  it "Explains the search options" do
+    visit home_path
+    instructions = page.find('div.instructions')
+  byebug
+  end
 
 
   context "Before a user has searched for anything" do
