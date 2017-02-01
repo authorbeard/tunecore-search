@@ -34,7 +34,7 @@ RSpec.describe "search/home.html.erb" do
       expect(search).to have_css('.form-group.row')
     end
 
-    it "Labels the query input field" do
+    it "Has a label element for the keyword input field" do
       search = page.find('div#search-box')
       expect(search).to have_css('label', :count => 1)
     end
@@ -43,6 +43,11 @@ RSpec.describe "search/home.html.erb" do
       search = page.find('div#search-box')
       expect(search).to have_css('label.col-xs-2.col-form-label')
       expect(search).to have_css('label[for=query-terms]', :count=>1)
+    end
+
+    it "The label refers to the keyword input field box" do
+      label = page.find('label#search-box-label')
+      expect(label).to have_content("Search terms:")
     end
 
   end
