@@ -3,15 +3,16 @@ require 'rails_helper'
 RSpec.describe Artist do
 
   before :each do
-    @artist = Artist.create(name: Faker::Name.name)
+    @artist = Artist.new(name: Faker::Name.name)
   end
 
-  it 'Each artist has a name' do
-    expect(@artist.name).to_not eq(nil)
+  it 'Artist can be persisted' do
+    expect(@artist.save).to_not eq(false)
   end
 
   it 'An artist can have an album' do
     @artist.albums << Album.create(name: "Black Star")
+    @artist.save
     expect(@artist.albums.count).to eq(1)
   end
 
@@ -33,9 +34,6 @@ RSpec.describe Artist do
     expect(@artist.songs.count).to eq(10)
   end
 
-  it 'can return an array of artist names' do
-    expect(Artist.all_names.count).to_not eq(0)
-  end
 
 
 
