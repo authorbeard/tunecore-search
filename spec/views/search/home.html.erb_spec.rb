@@ -44,24 +44,37 @@ RSpec.describe "search/home.html.erb" do
         it "The label has responsive classes for column, field reference" do
           search = page.find('div#search-input-group')
           expect(search).to have_css('label.col-xs-2.col-form-label')
-          expect(search).to have_css('label[for=query-terms]', :count=>1)
+          expect(search).to have_css('label[for=query-string]', :count=>1)
         end
 
         it "The label refers to the keyword input field box" do
-          label = page.find('label[for=query-terms]')
+          label = page.find('label[for=query-string]')
           expect(label).to have_content("Search terms:")
         end
       end
-        
+
       context "Search Box" do
         it "Places the search input field in its own responsive column" do
           search = page.find('div#search-input-group')
           expect(search).to have_css('div.col-xs-10#search-box')
         end
 
-        it "Renders the search box as an input element" do
-          expect
+        it "Renders the search box as an input element inside the div" do
+          search = page.find('div#search-box')
+          expect(search).to have_css('input')
         end
+
+        it "Classifies the input field for form-control" do
+          search = page.find('div#search-box')
+          expect(search).to have_css('input.form-control')
+        end
+
+        it "Identifies the search-box as referring to the query-string" do
+          search = page.find('div#search-box')
+          expect(search).to have_css('input[for=query-string]')
+          expect(search).to have_css('#query-string')
+        end
+
       end
 
     end
