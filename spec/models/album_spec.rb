@@ -10,7 +10,7 @@ RSpec.describe Album do
   end
 
   it 'Can be associated to an artist' do
-    @album.artist == Artist.create(name: "Black Star")
+    @album.artist = Artist.create(name: "Black Star")
     @album.save
     expect(@album.artist).to_not be(nil) 
   end
