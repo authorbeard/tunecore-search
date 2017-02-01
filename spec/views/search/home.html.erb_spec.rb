@@ -8,6 +8,15 @@ RSpec.describe "search/home.html.erb" do
     expect(page).to have_content("Welcome to Tunecore Search") 
   end
 
+  it "Contains basic instructions" do
+    visit home_path
+    expect(page).to have_css('div.instructions')
+  end
+
+  # it "Explains the options" do
+  # end
+
+
   context "Before a user has searched for anything" do
     it "Has a responsive grid" do
       assert false
