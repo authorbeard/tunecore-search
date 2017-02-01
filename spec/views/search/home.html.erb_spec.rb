@@ -34,10 +34,16 @@ RSpec.describe "search/home.html.erb" do
       expect(search).to have_css('.form-group.row')
     end
 
-    it "Labels the search-box clearly" do
-      expect(page).to have_css('form#search-form div#search-box')
+    it "Labels the query input field" do
+      search = page.find('div#search-box')
+      expect(search).to have_css('label', :count => 1)
     end
 
+    it "The label has responsive classes for column, field reference" do
+      search = page.find('div#search-box')
+      expect(search).to have_css('label.col-xs-2.col-form-label')
+      expect(search).to have_css('label[for=query-terms]', :count=>1)
+    end
 
   end
 
