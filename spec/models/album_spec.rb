@@ -22,13 +22,12 @@ RSpec.describe Album do
     expect(@album.songs.count).to eq(10)
   end
 
-  it 'An album can have many songs' do
-    10.times{ Song.create(name: Faker::Name.name)}
-    Song.all.each{|s|
-      s.album = @album
-      s.save
-    }
-    expect(@album.songs.count).to eq(10)
+  it 'Correctly associates artists & songs' do
+    @album.artist = Artist.create(name: Faker::Commerce.product_name)
+    song = Song.create(name: Faker::Commerce.product_name)
+    @album.songs << song
+    @album.save
+    expect(@album.songs.first.artist).to eq(@album.artist)
   end
 
 
