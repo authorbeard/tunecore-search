@@ -31,9 +31,13 @@ RSpec.describe "search/home.html.erb" do
 
     it "Places the form group in a row" do
       search = page.find('div.container form#search-form')
-      # byebug
       expect(search).to have_css('.form-group.row')
     end
+
+    it "Labels the search-box clearly" do
+      expect(page).to have_css('form#search-form div#search-box')
+    end
+
 
   end
 
