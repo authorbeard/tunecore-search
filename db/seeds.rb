@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-10.times{ Artist.create(name: Faker::Name.name) }
+10.times{ Artist.create(name: Faker::Commerce.product_name) }
 100.times{ Album.create(name: Faker::Commerce.product_name) }
 500.times{ Song.create(name: Faker::Commerce.product_name) }
 
@@ -26,16 +26,14 @@ artists = Artist.all
   num_of_songs = [rand(1..10), @all_songs.length].min
 # byebug
   album_songs = @all_songs.pop(num_of_songs)
-  puts "unclaimed: #{@all_songs.length}"
 
   alb.songs << album_songs
-  alb.save
+  # alb.save
 }
 
 artists.each{|artist|
   num_of_albums = [rand(1..10), @all_albums.length].min
   artist_albums = @all_albums.pop(num_of_albums)
-  puts "unclaimed: #{@all_albums.length}"
   artist.albums << artist_albums
   artist.save
 }

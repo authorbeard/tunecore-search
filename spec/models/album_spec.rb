@@ -5,6 +5,8 @@ RSpec.describe Album do
     @album = Album.create(name: Faker::Name.name)
   end
 
+  
+
 
   
 end
