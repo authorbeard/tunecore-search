@@ -16,15 +16,25 @@ RSpec.describe "search/home.html.erb" do
       expect(page).to have_css('div.container')
     end
 
-    it "renders the search form inside the container" do
-      expect(page).to have_css('.container form.search-form')
+    it "Renders the search form inside the container" do
+      expect(page).to have_css('.container form')
     end
 
-    it "should have a search box" do
-      search = page.find('.container form.search-form')
-      byebug
-      expect(search).to have_css('div.form-group.row.search-box')
+    it "Labels the form clearly" do
+      expect(page).to have_css('div.container form#search-form')
     end
+
+    it "Has a form group for the search box & label" do
+      search = page.find('.container form#search-form')
+      expect(search).to have_css('div.form-group')
+    end
+
+    it "Places the form group in a row" do
+      search = page.find('div.container form#search-form')
+      # byebug
+      expect(search).to have_css('.form-group.row')
+    end
+
   end
 
 
