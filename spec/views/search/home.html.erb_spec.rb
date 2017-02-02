@@ -16,6 +16,11 @@ RSpec.describe "search/home.html.erb" do
       expect(page).to have_css('div.container', :maximum => 1)
     end
 
+    it "has rows inside the container for input fields, selectors, button, etc." do
+      container = page.find('div.container')
+      expect(container).to have_selector('div.row', :minimum => 3)
+    end
+
     it "Renders the search form inside the container" do
       expect(page).to have_css('.container form')
     end
