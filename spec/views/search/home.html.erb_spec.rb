@@ -7,9 +7,46 @@ RSpec.describe "search/home.html.erb" do
     visit home_path
   end
 
-  it "Renders all page contents inside a container" do
-    expect(page.all('body > *').length).to eq(1)
+  context "General layout" do
+
+    it "Renders all page contents inside a container" do
+      expect(page.all('body > *').length).to eq(1)
+      expect(page.find('body > *').tag_name).to eq('div')
+    end
+
+    it "Container has two main areas, a form and a div" do
+      expect(page.all('div.container > *').length).to eq(2)
+      container_contents = page.all('div.container > *')
+      expect(container_contents[0].tag_name).to eq('form')
+      expect(container_contents[1].tag_name).to eq('div')
+      expect(container_contents[2].tag_name).to be(nil)
+    end
+
+    it "Does not display the search results div on initial load" do
+      expect(page).to have_selector('div#search-results', :visible => false)
+    end
+
+    it "The Search Results section is responsive" do
+      expect(page.find('.container div')).to have_css('.row')
+    end
+
+    it "The Search has radio buttons for search options" do
+      search_group = page.find('div.form-group#search-input-group')
+      expect(search_group.has_selector?('input[type=radio]')).to be(true)
+    end
+
+    it "The search options are in a responsive group" do
+      expect(search_group.has_selector?('fieldset.form-group.row')).to be(true)
+    end
+
+    it "Loads with the default search button selected" do
+      first_button = page.all('fieldset div.form-check').first
+      expecte(first_button).to have_selector('input[checked]')
+    end
+
   end
+
+end
 
 
 
@@ -122,14 +159,3 @@ RSpec.describe "search/home.html.erb" do
   # end
 
 
-
-
-
-
-
-  
-
-
-
-
-end
