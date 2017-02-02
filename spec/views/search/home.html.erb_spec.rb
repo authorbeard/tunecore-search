@@ -47,6 +47,10 @@ RSpec.describe "search/home.html.erb" do
       expect(search_group.has_selector?('fieldset.form-group.row')).to be(true)
     end
 
+    it "Has one radio button each for default and custom" do
+      expect(page).to have_selector('fieldset input[type=radio]', :count=>2)
+    end
+
     it "Loads with the default search button selected" do
       first_button = page.all('fieldset div.form-check').first
       expecte(first_button).to have_selector('input[checked]')

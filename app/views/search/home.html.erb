@@ -1,7 +1,13 @@
 <div class="container">
-  <form>
+  <%= form_for :search, method: 'post' do |f| %>
+    <div class="form-group row" id="search-input-group">
+  
+    </div>
+    <fieldset class="form-group row">
 
-  </form>
+    </fieldset>
+    <%= f.submit "Search", class: "btn btn-primary" %>
+  <% end %>
 
   <div class="row" style="display: none;" id="search-results">
 
