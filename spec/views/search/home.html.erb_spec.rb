@@ -39,6 +39,10 @@ RSpec.describe "search/home.html.erb" do
       expect(search_group.has_selector?('input[type=radio]')).to be(true)
     end
 
+    it "The radio buttons are grouped inside the form" do
+      expect(page).to have_selector('form div#search-input-group')
+    end
+
     it "The search options are in a responsive group" do
       expect(search_group.has_selector?('fieldset.form-group.row')).to be(true)
     end
