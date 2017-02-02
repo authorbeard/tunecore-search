@@ -13,7 +13,7 @@ RSpec.describe "search/home.html.erb" do
 
   context "It has a responsive grid layout" do
     it "renders page contents inside a container" do
-      expect(page).to have_css('div.container')
+      expect(page).to have_css('div.container', :maximum => 1)
     end
 
     it "Renders the search form inside the container" do
@@ -119,7 +119,8 @@ RSpec.describe "search/home.html.erb" do
         end 
 
         it "Defaults to search across Song, Artist & Album names" do
-
+          page.click_on("i.fa-plus-circle")
+          expect(page).to have_selector("div#search-options", :visible => true)
         end 
 
       end
