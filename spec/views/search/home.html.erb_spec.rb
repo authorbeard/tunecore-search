@@ -7,19 +7,11 @@ RSpec.describe "search/home.html.erb" do
     visit home_path
   end
 
-  it "Welcomes the User" do
-    expect(page).to have_content("Welcome to Tunecore Search") 
-  end
-
-  context "It has a responsive grid layout" do
-    it "renders page contents inside a container" do
-      expect(page).to have_css('div.container', :maximum => 1)
+  context "It has a responsive layout" do
+    it "renders all page contents inside a container" do
+      expect(page.all('body > *').length).to eq(1)
     end
 
-    it "has rows inside the container for input fields, selectors, button, etc." do
-      container = page.find('div.container')
-      expect(container).to have_selector('div.row', :minimum => 3)
-    end
 
 
 
