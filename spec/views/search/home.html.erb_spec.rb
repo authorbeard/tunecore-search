@@ -30,8 +30,8 @@ RSpec.describe "search/home.html.erb" do
       Capybara.ignore_hidden_elements = true
     end
 
-    it "The Search Results section is responsive" do
-      expect(page.find('.container div')).to have_css('.row')
+    it "The Search Results section follows grid design pattern" do
+      expect(page).to have_selector('.container div.row#search-results', :visible=>false)
     end
 
     it "The Search has radio buttons for search options" do
