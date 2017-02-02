@@ -15,15 +15,19 @@ RSpec.describe "search/home.html.erb" do
     end
 
     it "Container has two main areas, a form and a div" do
+      Capybara.ignore_hidden_elements = false
       expect(page.all('div.container > *').length).to eq(2)
       container_contents = page.all('div.container > *')
       expect(container_contents[0].tag_name).to eq('form')
       expect(container_contents[1].tag_name).to eq('div')
       expect(container_contents[2]).to be(nil)
+      Capybara.ignore_hidden_elements = true
     end
 
     it "Does not display the search results div on initial load" do
-      expect(page).to have_selector('div#search-results', :visible => false)
+      Capybara.ignore_hidden_elements = false
+      expect(page).to have_selector('.container  div', :visible => false)
+      Capybara.ignore_hidden_elements = true
     end
 
     it "The Search Results section is responsive" do
