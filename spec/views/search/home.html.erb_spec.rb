@@ -20,10 +20,10 @@ RSpec.describe "search/home.html.erb" do
 
   context 'Search terms section' do
     it "Has a description" do
-byebug
       search_terms = page.find('div#search-terms')
+  # byebug
       expect(search_terms).to have_selector('legend')
-      expect(search_terms.find('legend').value)
+      expect(search_terms.find('legend').text).to be("I'm searching for:")
     end
 
 
