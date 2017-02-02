@@ -13,9 +13,10 @@ RSpec.describe "search/home.html.erb" do
 
   it "Has a div to display search terms and a form for the search options" do
     container_contents = page.all('div.container > *')
-    expect(container_contents.length).to eq(2)
-    expect(container_contents[1]).to have_selector('div#search-terms')
-    expect(container_contents[2]).to have_selector('form')
+    expect(container_contents.length).to eq(3)
+# byebug
+    expect(container_contents[1].matches_selector?('div#search-terms')).to be(true)
+    expect(container_contents[2].matches_selector?('form')).to be(true)
   end
 
 
