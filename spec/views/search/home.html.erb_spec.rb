@@ -19,7 +19,7 @@ RSpec.describe "search/home.html.erb" do
       container_contents = page.all('div.container > *')
       expect(container_contents[0].tag_name).to eq('form')
       expect(container_contents[1].tag_name).to eq('div')
-      expect(container_contents[2].tag_name).to be(nil)
+      expect(container_contents[2]).to be(nil)
     end
 
     it "Does not display the search results div on initial load" do
