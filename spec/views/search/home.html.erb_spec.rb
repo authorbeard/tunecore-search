@@ -21,13 +21,8 @@ RSpec.describe "search/home.html.erb" do
       expect(container).to have_selector('div.row', :minimum => 3)
     end
 
-    it "Renders the search form inside the container" do
-      expect(page).to have_css('.container form')
-    end
 
-    it "Labels the form clearly" do
-      expect(page).to have_css('div.container form#search-form')
-    end
+
 
     context "Query Input field & label" do
       it "Groups input field, label & button in a form-group" do
@@ -46,7 +41,7 @@ RSpec.describe "search/home.html.erb" do
           expect(search).to have_css('label', :count => 1)
         end
 
-        it "The label is responsive but always stacks atop the search box" do
+        it "The label always stacks atop the search box" do
           search = page.find('div#search-input-group')
           expect(search).to have_css('label.col-xs-4.col-form-label')
         end
