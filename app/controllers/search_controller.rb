@@ -4,6 +4,7 @@ class SearchController < ApplicationController
   end
 
   def search
+byebug
   end
 
 
