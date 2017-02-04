@@ -8,7 +8,12 @@
       <p class="col-form-legend col-sm-2">Search options: </p>
       <div>
         <label>
-          <%= f.radio_button :default, checked: true %>
+          <%= f.radio_button :default, "", checked: true %>
+        </label>
+      </div>
+      <div>
+        <label>
+          <%= f.radio_button :custom, ""%>
         </label>
       </div>
         

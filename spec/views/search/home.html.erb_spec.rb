@@ -33,28 +33,28 @@ RSpec.describe "search/home.html.erb" do
 
   context "Search form" do
 
-    it "The Search Results section follows grid design pattern" do
-      expect(page).to have_selector('.container div.row#search-results', :visible=>false)
-    end
-
-    it "The Search has radio buttons for search options" do
-      search_group = page.find('div.form-group#search-input-group')
-      expect(search_group.has_selector?('input[type=radio]')).to be(true)
+    it "The Search has radio buttons for the main search options" do
+      expect(page).to have_selector('input[type=radio]', :count=>2)
     end
 
     it "The search options are in a responsive group" do
-      search_group = page.find('div.form-group#search-input-group')
-      expect(search_group.has_selector?('fieldset.form-group.row')).to be(true)
-      expect
-    end
+      search_opts = page.find('div.form-group.row#search-options')
+      expect(search_opts).to_not be(nil)
+      expect(search_opts).to have_selector('div.form-check', :count=>2)
 
-    it "Has one radio button each for default and custom" do
-      expect(page).to have_selector('finput[type=radio]', :count=>2)
     end
 
     it "Loads with the default search button selected" do
       first_button = page.all('fieldset div.form-check').first
       expecte(first_button).to have_selector('input[checked]')
+    end
+
+  end
+
+  context "Search results" do
+    
+    it "The Search Results section follows grid design pattern" do
+      expect(page).to have_selector('.container div.row#search-results', :visible=>false)
     end
 
   end
