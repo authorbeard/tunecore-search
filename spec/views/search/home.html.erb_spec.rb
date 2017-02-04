@@ -29,6 +29,9 @@ RSpec.describe "search/home.html.erb" do
       expect(page).to have_selector('.container  div', :visible => false)
       Capybara.ignore_hidden_elements = true
     end
+  end
+
+  context "Search form" do
 
     it "The Search Results section follows grid design pattern" do
       expect(page).to have_selector('.container div.row#search-results', :visible=>false)
@@ -39,16 +42,14 @@ RSpec.describe "search/home.html.erb" do
       expect(search_group.has_selector?('input[type=radio]')).to be(true)
     end
 
-    it "The radio buttons are grouped inside the form" do
-      expect(page).to have_selector('form div#search-input-group')
-    end
-
     it "The search options are in a responsive group" do
+      search_group = page.find('div.form-group#search-input-group')
       expect(search_group.has_selector?('fieldset.form-group.row')).to be(true)
+      expect
     end
 
     it "Has one radio button each for default and custom" do
-      expect(page).to have_selector('fieldset input[type=radio]', :count=>2)
+      expect(page).to have_selector('finput[type=radio]', :count=>2)
     end
 
     it "Loads with the default search button selected" do

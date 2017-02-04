@@ -1,12 +1,22 @@
 <div class="container">
-  <%= form_for :search, method: 'post' do |f| %>
+  <%= form_for :q do |f| %>
+
     <div class="form-group row" id="search-input-group">
   
     </div>
-    <fieldset class="form-group row">
+    <div class="form-group row" id="search-options">
+      <p class="col-form-legend col-sm-2">Search options: </p>
+      <div>
+        <label>
+          <%= f.radio_button :default, checked: true %>
+        </label>
+      </div>
+        
 
-    </fieldset>
-    <%= f.submit "Search", class: "btn btn-primary" %>
+
+    </div>
+
+    <%= button_tag "Search", type: "Submit",class: "btn btn-primary" %>
   <% end %>
 
   <div class="row" style="display: none;" id="search-results">
@@ -14,3 +24,5 @@
   </div>
 
 </div><!--container -->
+
+
