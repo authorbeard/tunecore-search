@@ -57,8 +57,9 @@ RSpec.describe "search/home.html.erb" do
     end
 
     it "Loads with the default search button selected" do
-      first_button = page.all('fieldset div.form-check').first
-      expect(first_button).to have_selector('input[checked]')
+      search_opts = page.all('div.form-check')
+      expect(search_opts[0].has_css?('input[checked]')).to be(true)
+      expect(search_opts[1].has_css?('input[checked]')).to be(false)
     end
 
   end
