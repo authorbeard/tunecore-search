@@ -53,7 +53,7 @@ RSpec.describe "search/home.html.erb" do
     end
 
     it 'Groups search option radios on one line' do
-      expect('div#search-options').to have_selector('form-group-inline', :count=>2)
+      expect(page.find('div#search-options')).to have_selector('div.form-check-inline', :count=>2)
     end
 
     it "Loads with the default search button selected" do
