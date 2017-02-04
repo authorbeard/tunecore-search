@@ -44,11 +44,16 @@ RSpec.describe "search/home.html.erb" do
 
     it 'Uses Bootstrap form-check grouping' do
       search_opts = page.all('div.form-check')
-      expect(search_opts.all?{|el|
-              expect(el).to have_selector('label input.form-check-input')
-            })
+      expect(
+        search_opts.all?{|el|
+          expect(el).to have_selector('label input.form-check-input')
+        })
         .to be(true)
 
+    end
+
+    it 'Groups search option radios on one line' do
+      expect('div#search-options').to have_selector('form-group-inline', :count=>2)
     end
 
     it "Loads with the default search button selected" do
