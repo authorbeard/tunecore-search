@@ -40,13 +40,20 @@ RSpec.describe "search/home.html.erb" do
     it "The search options are in a responsive group" do
       search_opts = page.find('div.form-group.row#search-options')
       expect(search_opts).to_not be(nil)
-      expect(search_opts).to have_selector('div.form-check', :count=>2)
+    end
+
+    it 'Uses Bootstrap form-check grouping' do
+      search_opts = page.all('div.form-check')
+      expect(search_opts.all?{|el|
+              expect(el).to have_selector('label input.form-check-input')
+            })
+        .to be(true)
 
     end
 
     it "Loads with the default search button selected" do
       first_button = page.all('fieldset div.form-check').first
-      expecte(first_button).to have_selector('input[checked]')
+      expect(first_button).to have_selector('input[checked]')
     end
 
   end
