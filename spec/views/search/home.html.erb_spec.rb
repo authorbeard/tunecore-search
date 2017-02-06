@@ -133,7 +133,7 @@ RSpec.describe "search/home.html.erb" do
 
       it "Labels should list all available search fields" do
         labels = page.all('div#inclusive-search label')   
-        expect(label.first.text).to eq("Artist Name")
+        expect(labels.first.text).to eq("Artist Name")
         expect(labels[1].text).to eq("Artist Name")
         expect(labels[2].text).to eq("Artist Name")
         
