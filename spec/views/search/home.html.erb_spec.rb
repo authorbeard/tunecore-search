@@ -60,7 +60,8 @@ RSpec.describe "search/home.html.erb" do
     end
  
     it "The search box has placeholder text with additional instructions" do
-      expect(page).to have_content('To look for multiple words/phrases, separate them with a comma.')
+      search_box = page.find('input#query-string')
+      expect(search_box['placeholder']).to_not be(nil)
     end
 
     it "The Search has radio buttons for the main search options" do
