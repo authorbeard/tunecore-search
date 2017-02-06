@@ -51,17 +51,11 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "The label has responsive features" do
-        expect(page.find('div#search-input-group')).to have_selector('label.col-sm-4.col-form-label')
+        expect(page.find('div#search-input-group')).to have_selector('label.col-form-label')
       end
 
       it "The label has some content" do 
         expect(page.find('label[for=query-string]').text).to_not eq("")
-      end
-
-      it "The search box is laid out properly" do
-        expect(page.find('div#search-input-group')).to have_selector('div.col-sm-12#search-box')
-        expect(page.all('div#search-box > *').length).to eq(1)
-        expect(page.has_selector?('div#search-box > input')).to be(true)
       end
 
       it "The search box refers to the correct value" do 
@@ -80,7 +74,7 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Contains input instructions below the search box" do
-        expect(page).to have_selector('small.col-sm-10#input-instructions')
+        expect(page).to have_selector('small#input-instructions')
         instructions = page.find('small')
         expect(instructions.text).to eq('Separate each search term or phrase with a comma.')
         expect(page.all('#search-input-group').last).to have_selector('small')
