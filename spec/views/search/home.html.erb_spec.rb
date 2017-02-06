@@ -175,6 +175,10 @@ RSpec.describe "search/home.html.erb" do
         expect(page.find('form > div#inclusive-search + div')['id']).to eq('narrowed-search')
       end
 
+      it "The narrowed search fields use responsive classes" do
+        expect(page).to have_selector('div.form-group.row#narrowed-search')
+      end
+
 
 
 
