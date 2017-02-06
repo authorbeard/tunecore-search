@@ -112,8 +112,7 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Inclusive search options should be in their own form group" do
-        expect(page).to have_selector('div.form-group.row')
-        expect(page.find('div.form-group.row')['id']).to eq('inclusive-search')
+        expect(page).to have_selector('div.form-group.row#inclusive-search')
       end
 
       it "Inclusive search should include check boxes for each model" do
