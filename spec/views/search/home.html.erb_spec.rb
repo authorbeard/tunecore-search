@@ -72,6 +72,12 @@ RSpec.describe "search/home.html.erb" do
         search_box = page.find('input#query-string')
         expect(search_box['placeholder']).to_not be(nil)
       end
+
+      it "Contains input instructions below the search box" do
+        expect(page).to have_selector('small.col-sm-6#input-instructions')
+        instructions = page.find('small')
+        expect(instructions.text).to eq('Separate each search term with a comma.')
+      end
     end
 
     context "Search option Selectors" do
@@ -177,6 +183,11 @@ RSpec.describe "search/home.html.erb" do
 
       it "The narrowed search fields use responsive classes" do
         expect(page).to have_selector('div.form-group.row#narrowed-search')
+      end
+
+      it "Allows the user to narrow search by artist" do
+        narrow_search = page.find('div#narrowed-search')
+        expect(page).to have_selector('.whut')
       end
 
 
