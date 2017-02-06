@@ -113,7 +113,6 @@ RSpec.describe "search/home.html.erb" do
         Capybara.ignore_hidden_elements = true
       end
 
-
       it "Form should have a section to specify which models to search" do       
         expect(page.find('form')).to have_selector('div#inclusive-search')
       end
@@ -147,7 +146,7 @@ RSpec.describe "search/home.html.erb" do
 
       it "Check boxes should actually refer to fields" do
         checkboxes = page.all('div#inclusive-search label')
-        checkboxes.each {|box|
+        checkboxes.each {|box|  
           expect(box.find('input')['id']).to eq(box.text.parameterize)
           expect(box.find('input')['value']).to eq(box.text.parameterize)
         }
@@ -159,7 +158,7 @@ RSpec.describe "search/home.html.erb" do
     end
   end
 
-  context "Inclusive search options" do
+  context "Narrowed search options" do
       before :context do 
         Capybara.ignore_hidden_elements = false
       end
@@ -167,6 +166,16 @@ RSpec.describe "search/home.html.erb" do
       after :context do
         Capybara.ignore_hidden_elements = true
       end
+
+      it "The form has fields for narrowed search" do 
+        expect(page).to have_selector("div#narrowed-search")
+      end
+
+      it "The narrowed search fields display below inclusive search" do
+        expect(page.find('form > div#inclusive-search + div')).to have_css('#narrowed-search')
+      end
+
+
 
 
 
@@ -181,100 +190,5 @@ RSpec.describe "search/home.html.erb" do
   end
 
 end
-
-
-
-
-
-
-
-
-
-
-  #     it "The label always stacks atop the search box" do
-  #       search = page.find('div#search-input-group')
-  #       expect(search).to have_css('label.col-xs-4.col-form-label')
-  #     end
-
-  #     it "The label refers to the keyword input field box" do
-  #       label = page.find('label[for=query-string]')
-  #       expect(label).to have_content("Search terms:")
-  #     end
-  #   end
-
-  #   context "Search Box" do
-  #     it "Places the search input field in its own responsive column" do
-  #       search = page.find('div#search-input-group')
-  #       expect(search).to have_css('div.col-xs-10#search-box')
-  #     end
-
-  #     it "Renders the search box as an input element inside the div" do
-  #       search = page.find('div#search-box')
-  #       expect(search).to have_css('input')
-  #     end
-
-  #     it "Classifies the input field for form-control" do
-  #       search = page.find('div#search-box')
-  #       expect(search).to have_css('input.form-control')
-  #     end
-
-  #     it "Identifies the search-box as referring to the query-string" do
-  #       search = page.find('div#search-box')
-  #       expect(search).to have_css('input[for=query-string]')
-  #       expect(search).to have_css('#query-string')
-  #     end
-
-  #     it "Has some placeholder text" do
-  #       # search=page.find('input.form-control')
-  #       expect(page).to have_selector("input[placeholder='Enter your search text here']")
-  #     end
-  #   end
-
-  #   context "Search Button" do 
-  #     it "The page has one submit button" do
-  #       search = page.find("div#search-input-group")
-  #       expect(search).to have_css("button[type=submit]", :count=>1)
-  #     end
-
-  #     it "The button is not in the same row as the input field" do
-  #       search = page.find("div#search-input-group")
-  #       expect(search.has_no_button?).to be(true)
-  #     end
-
-  #     it "The button is in its own row" do
-  #       search = page.find("div.form-group")
-  #       expect(search.inspect[1]).to be("div.form-group")
-  #       expect(search.inspect[1].has_button?).to be(true)
-  #     end
-  #   end
-
-  #   context "Search Options" do
-  #     it "Has search options" do
-  #       expect(page).to have_selector("fieldset", :count=>1)
-  #     end
-
-  #     it "Informs the user that there are options for the search" do
-  #       opts = page.find("fieldset")
-  #       expect(opts).to have_selector("legend")
-  #       expect(opts.find("legend")).to have_content
-  #     end
-
-  #     it "Does not display options unless a button is clicked" do
-  #       opts = page.find("fieldset div#search-options")
-  #       expect(page).to have_selector("div#search-options", :visible => false)
-  #     end
-
-  #     it "Has a button to display search options" do
-  #       expect(page).to have_css("i.fa-plus-circle")
-  #     end 
-
-  #     it "Defaults to search across Song, Artist & Album names" do
-  #       page.click_on("i.fa-plus-circle")
-  #       expect(page).to have_selector("div#search-options", :visible => true)
-  #     end 
-
-  #   end
-
-  # end
 
 
