@@ -146,10 +146,10 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Check boxes should actually refer to fields" do
-        checkboxes = page.all('input[type=checkbox]')
+        checkboxes = page.all('div#inclusive-search label')
         checkboxes.each {|box|
-          expect(box[id]).to_not be(nil)
-          expect(box[value]).to_not be(nil)
+          expect(box.find('input')['id']).to eq(box.text)
+          expect(box.find('input')['value']).to eq(box.text)
         }
       end
 
