@@ -42,7 +42,7 @@ RSpec.describe "search/home.html.erb" do
     it "The label refers correctly to the search box" do
       label = page.find('div#search-input-group label')
       search_box = page.find('div#search-input-group input')
-      expect(label['for']).to eq(search_box)['id']
+      expect(label['for']).to eq(search_box['id'])
     end
 
     it "The label has responsive features" do
