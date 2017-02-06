@@ -114,8 +114,7 @@ RSpec.describe "search/home.html.erb" do
       end
 
 
-      it "Form should have a section to specify which models to search" do
-        
+      it "Form should have a section to specify which models to search" do       
         expect(page.find('form')).to have_selector('div#inclusive-search')
       end
 
@@ -143,17 +142,35 @@ RSpec.describe "search/home.html.erb" do
         labels = page.all('div#inclusive-search label')   
         expect(labels.first.text).to eq("Artist Name")
         expect(labels[1].text).to eq("Album Title")
-        expect(labels[2].text).to eq("Song Title")
-        
+        expect(labels[2].text).to eq("Song Title")      
+      end
+
+      it "Check boxes should actually refer to fields" do
+        checkboxes = page.find('input[type=checkbox')
+        checkboxes.each {|box|
+          expect(box[id]).to_not be(nil)
+          expect(box[value]).to_not be(nil)
+        }
       end
 
       it "The inclusive search checkboxes should be invisible on load" do   
         expect(page.find('div#inclusive-search').visible?).to be(false)
       end
+    end
+  end
+
+  context "Inclusive search options" do
+      before :context do 
+        Capybara.ignore_hidden_elements = false
+      end
+
+      after :context do
+        Capybara.ignore_hidden_elements = true
+      end
+
+
 
     end
-
-  end
 
   context "Search results" do
     
