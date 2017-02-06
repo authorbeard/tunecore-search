@@ -142,7 +142,8 @@ RSpec.describe "search/home.html.erb" do
       Capybara.ignore_hidden_elements = true
 
       it "The inclusive search checkboxes should be invisible on load" do
-        expect(page).to have_selector('div#inclusive-search', :visible=>false)
+    # byebug    
+        expect(page.find('div#inclusive-search').visible?).to be(false)
       end
 
     end
