@@ -146,7 +146,7 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Check boxes should actually refer to fields" do
-        checkboxes = page.find('input[type=checkbox')
+        checkboxes = page.all('input[type=checkbox]')
         checkboxes.each {|box|
           expect(box[id]).to_not be(nil)
           expect(box[value]).to_not be(nil)
