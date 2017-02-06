@@ -74,9 +74,10 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Contains input instructions below the search box" do
-        expect(page).to have_selector('small.col-sm-6#input-instructions')
+        expect(page).to have_selector('small.col-sm-10#input-instructions')
         instructions = page.find('small')
-        expect(instructions.text).to eq('Separate each search term with a comma.')
+        expect(instructions.text).to eq('Separate each search term or phrase with a comma.')
+        expect(page.all('#search-input-group').last).to have_selector('small')
       end
     end
 
