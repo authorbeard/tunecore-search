@@ -37,7 +37,30 @@ RSpec.describe "search/home.html.erb" do
       search_box = page.all('form > div').first
       expect(search_box).to have_selector('label', :count=>1)
       expect(search_box).to have_selector('input[type=search]', :count=>1)
+    end
 
+    it "The label refers correctly to the search box" do
+      label = page.find('div#search-input-group label')
+      search_box = page.find('div#search-input-group input')
+      expect(label['for']).to eq(search_box)['id']
+    end
+
+    it "The label has responsive features" do
+      expect(page.find('div#search-input-group')).to have_selector('label.col-sm-4.col-form-label')
+    end
+
+    it "The search box refers to the correct value" do 
+      search_box = page.find('div#search-input-group input')
+      expect(search_box['id']).to eq('query-string')
+    end
+
+    it "The search box uses uses Bootstrap's responsive classes" do
+      search_box = page.find('input#query-string')
+      expect(search_box['class']).to eq('form-control')
+    end
+ 
+    it "The search box has placeholder text with additional instructions" do
+      expect(page).to have_content('To look for multiple words/phrases, separate them with a comma.')
     end
 
     it "The Search has radio buttons for the main search options" do
@@ -88,22 +111,7 @@ end
 
 
 
-  # context "Query Input field & label" do
-  #   it "Groups input field, label & button in a form-group" do
-  #     search = page.find('.container form#search-form')
-  #     expect(search).to have_css('div.form-group')
-  #   end
 
-  #   it "Places the form group in a row" do
-  #     search = page.find('div.container form#search-form')
-  #     expect(search).to have_css('.row')
-  #   end
-
-  #   context "Label" do
-  #     it "Has a label element for the keyword input field" do
-  #       search = page.find('div#search-input-group')
-  #       expect(search).to have_css('label', :count => 1)
-  #     end
 
   #     it "The label always stacks atop the search box" do
   #       search = page.find('div#search-input-group')
