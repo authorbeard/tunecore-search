@@ -33,6 +33,13 @@ RSpec.describe "search/home.html.erb" do
 
   context "Search form" do
 
+    it "Has a label and keyword search box on top" do
+      search_box = page.all('form > div').first
+      expect(search_box).to have_selector('label', :count=>1)
+      expect(search_box).to have_selector('input[type=search]', :count=>1)
+
+    end
+
     it "The Search has radio buttons for the main search options" do
       expect(page).to have_selector('input[type=radio]', :count=>2)
     end
