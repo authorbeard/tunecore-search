@@ -105,9 +105,17 @@ RSpec.describe "search/home.html.erb" do
     end
 
     context "Inclusive search options" do
-      Capybara.ignore_hidden_elements = false
+      before :context do 
+        Capybara.ignore_hidden_elements = false
+      end
+
+      after :context do
+        Capybara.ignore_hidden_elements = true
+      end
+
 
       it "Form should have a section to specify which models to search" do
+        
         expect(page.find('form')).to have_selector('div#inclusive-search')
       end
 
@@ -138,8 +146,6 @@ RSpec.describe "search/home.html.erb" do
         expect(labels[2].text).to eq("Song Title")
         
       end
-
-      Capybara.ignore_hidden_elements = true
 
       it "The inclusive search checkboxes should be invisible on load" do   
         expect(page.find('div#inclusive-search').visible?).to be(false)
