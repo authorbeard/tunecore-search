@@ -172,7 +172,7 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "The narrowed search fields display below inclusive search" do
-        expect(page.find('form > div#inclusive-search + div')).to have_css('#narrowed-search')
+        expect(page.find('form > div#inclusive-search + div')['id']).to eq('narrowed-search')
       end
 
 
