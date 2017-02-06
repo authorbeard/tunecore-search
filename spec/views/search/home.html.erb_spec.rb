@@ -131,7 +131,15 @@ RSpec.describe "search/home.html.erb" do
         }
       end
 
-      Capybara.ignore_hidden_elements = false
+      it "Labels should list all available search fields" do
+        labels = page.all('div#inclusive-search label')   
+        expect(label.first.text).to eq("Artist Name")
+        expect(labels[1].text).to eq("Artist Name")
+        expect(labels[2].text).to eq("Artist Name")
+        
+      end
+
+      Capybara.ignore_hidden_elements = true
 
       it "The inclusive search checkboxes should be invisible on load" do
         expect(page).to have_selector('div#inclusive-search', :visible=>false)
