@@ -191,6 +191,13 @@ RSpec.describe "search/home.html.erb" do
         expect(page).to have_selector('.whut')
       end
 
+      it "Uses autocomplete populated with the names of artists in the database" do
+        byebug
+        10.times{ Artist.create!(name: Faker::Name.name) }
+        artists = Artist.pluck(:name)
+        byebug
+      end
+
 
 
 
