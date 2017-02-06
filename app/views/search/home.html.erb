@@ -2,11 +2,10 @@
   <form role="form">
 
     <div class="form-group row" id="search-input-group">
-      <label for="query-string" class="col-sm-4 col-form-label"></label>
+      <label for="query-string" class="col-sm-4 col-form-label">I'm searching for:</label>
       <input type="search" id="query-string" class="form-control" placeholder="To look for multiple words/phrases, separate them with a comma."></input>
     </div>
     <div class="form-group row" id="search-options">
-
         <legend class="col-form-legend">Search options: </legend>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
@@ -20,11 +19,14 @@
             Custom
           </label>
         </div>
+    </div><!--search options selectors -->
+    <div>
 
-        
+    </div><!--inclusive search options -->
 
+    <div>
 
-    </div>
+    </div><!--restrictive search options -->
 
     <%= button_tag "Search", type: "Submit",class: "btn btn-primary" %>
   </form>

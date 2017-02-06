@@ -29,72 +29,78 @@ RSpec.describe "search/home.html.erb" do
       expect(page).to have_selector('.container  div', :visible => false)
       Capybara.ignore_hidden_elements = true
     end
+
+    it "Displays the search button at the bottom of the form" do
+      expect(page.all('form > *').last).to have_selector('button[type=submit]')
+    end
   end
 
   context "Search form" do
+    context "Search box and label" do
+      it "Has a label and keyword search box on top" do
+        search_box = page.all('form > div').first
+        expect(search_box).to have_selector('label', :count=>1)
+        expect(search_box).to have_selector('input[type=search]', :count=>1)
+      end
 
-    it "Has a label and keyword search box on top" do
-      search_box = page.all('form > div').first
-      expect(search_box).to have_selector('label', :count=>1)
-      expect(search_box).to have_selector('input[type=search]', :count=>1)
+      it "The label refers correctly to the search box" do
+        label = page.find('div#search-input-group label')
+        search_box = page.find('div#search-input-group input')
+        expect(label['for']).to eq(search_box['id'])
+      end
+
+      it "The label has responsive features" do
+        expect(page.find('div#search-input-group')).to have_selector('label.col-sm-4.col-form-label')
+      end
+
+      it "The label has some content" do 
+        expect(page.find('label[for=query-string]').text).to_not eq("")
+      end
+
+      it "The search box refers to the correct value" do 
+        search_box = page.find('div#search-input-group input')
+        expect(search_box['id']).to eq('query-string')
+      end
+
+      it "The search box uses uses Bootstrap's responsive classes" do
+        search_box = page.find('input#query-string')
+        expect(search_box['class']).to eq('form-control')
+      end
+   
+      it "The search box has placeholder text with additional instructions" do
+        search_box = page.find('input#query-string')
+        expect(search_box['placeholder']).to_not be(nil)
+      end
     end
 
-    it "The label refers correctly to the search box" do
-      label = page.find('div#search-input-group label')
-      search_box = page.find('div#search-input-group input')
-      expect(label['for']).to eq(search_box['id'])
-    end
+    context "Search options" do
+      it "The Search has radio buttons for the main search options" do
+        expect(page).to have_selector('input[type=radio]', :count=>2)
+      end
 
-    it "The label has responsive features" do
-      expect(page.find('div#search-input-group')).to have_selector('label.col-sm-4.col-form-label')
-    end
+      it "The search options are in a responsive group" do
+        search_opts = page.find('div.form-group.row#search-options')
+        expect(search_opts).to_not be(nil)
+      end
 
-    it "The label has some content" do 
-      expect(page.find('label[for=query-string]').text).to_not eq("")
-    end
+      it 'Uses Bootstrap form-check grouping' do
+        search_opts = page.all('div.form-check')
+        expect(
+          search_opts.all?{|el|
+            expect(el).to have_selector('label input.form-check-input')
+          })
+          .to be(true)
+      end
 
-    it "The search box refers to the correct value" do 
-      search_box = page.find('div#search-input-group input')
-      expect(search_box['id']).to eq('query-string')
-    end
+      it 'Groups search option radios on one line' do
+        expect(page.find('div#search-options')).to have_selector('div.form-check-inline', :count=>2)
+      end
 
-    it "The search box uses uses Bootstrap's responsive classes" do
-      search_box = page.find('input#query-string')
-      expect(search_box['class']).to eq('form-control')
-    end
- 
-    it "The search box has placeholder text with additional instructions" do
-      search_box = page.find('input#query-string')
-      expect(search_box['placeholder']).to_not be(nil)
-    end
-
-    it "The Search has radio buttons for the main search options" do
-      expect(page).to have_selector('input[type=radio]', :count=>2)
-    end
-
-    it "The search options are in a responsive group" do
-      search_opts = page.find('div.form-group.row#search-options')
-      expect(search_opts).to_not be(nil)
-    end
-
-    it 'Uses Bootstrap form-check grouping' do
-      search_opts = page.all('div.form-check')
-      expect(
-        search_opts.all?{|el|
-          expect(el).to have_selector('label input.form-check-input')
-        })
-        .to be(true)
-
-    end
-
-    it 'Groups search option radios on one line' do
-      expect(page.find('div#search-options')).to have_selector('div.form-check-inline', :count=>2)
-    end
-
-    it "Loads with the default search button selected" do
-      search_opts = page.all('div.form-check')
-      expect(search_opts[0].has_css?('input[checked]')).to be(true)
-      expect(search_opts[1].has_css?('input[checked]')).to be(false)
+      it "Loads with the default search button selected" do
+        search_opts = page.all('div.form-check')
+        expect(search_opts[0].has_css?('input[checked]')).to be(true)
+        expect(search_opts[1].has_css?('input[checked]')).to be(false)
+      end
     end
 
   end
