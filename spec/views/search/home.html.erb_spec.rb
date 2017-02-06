@@ -74,7 +74,7 @@ RSpec.describe "search/home.html.erb" do
       end
     end
 
-    context "Search options" do
+    context "Search option Selectors" do
       it "The Search has radio buttons for the main search options" do
         expect(page).to have_selector('input[type=radio]', :count=>2)
       end
@@ -102,6 +102,42 @@ RSpec.describe "search/home.html.erb" do
         expect(search_opts[0].has_css?('input[checked]')).to be(true)
         expect(search_opts[1].has_css?('input[checked]')).to be(false)
       end
+    end
+
+    context "Inclusive search options" do
+      Capybara.ignore_hidden_elements = false
+
+      it "Form should have a section to specify which models to search" do
+        expect(page.find('form')).to have_selector('div#inclusive-search')
+      end
+
+      it "Inclusive search options should be in their own form group" do
+        expect(page).to have_selector('div.form-group.row')
+        expect(page.find('div.form-group.row')['id']).to eq('inclusive-search')
+      end
+
+      it "Inclusive search should include check boxes for each model" do
+        inc_search=page.find('div#inclusive-search')
+        expect(inc_search).to have_selector('input.form-check-input[type=checkbox]', :count=>3)
+      end
+
+      it "Check boxes should use responsive classes and render inline" do
+        inc_search=page.find('div#inclusive-search')
+        expect(inc_search).to have_selector('div.form-check-inline', :count=>3)
+
+        form_checks = inc_search.all('div.form-check-inline')
+        form_checks.each{|div| 
+          expect(div).to have_selector('label.form-check-label')
+          expect(div).to have_selector('label input.form-check-input')
+        }
+      end
+
+      Capybara.ignore_hidden_elements = false
+
+      it "The inclusive search checkboxes should be invisible on load" do
+        expect(page).to have_selector('div#inclusive-search', :visible=>false)
+      end
+
     end
 
   end
