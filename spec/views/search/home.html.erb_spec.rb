@@ -49,6 +49,10 @@ RSpec.describe "search/home.html.erb" do
       expect(page.find('div#search-input-group')).to have_selector('label.col-sm-4.col-form-label')
     end
 
+    it "The label has some content" do 
+      expect(page.find('label[for=query-string]').text).to_not eq("")
+    end
+
     it "The search box refers to the correct value" do 
       search_box = page.find('div#search-input-group input')
       expect(search_box['id']).to eq('query-string')
