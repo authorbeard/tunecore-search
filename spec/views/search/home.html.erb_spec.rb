@@ -31,7 +31,8 @@ RSpec.describe "search/home.html.erb" do
     end
 
     it "Displays the search button at the bottom of the form" do
-      expect(page.all('form > *').last).to have_selector('button[type=submit]')
+      button = page.all('form > *').last
+      expect(button['type']).to eq('Submit')
     end
   end
 
