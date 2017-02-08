@@ -183,21 +183,17 @@ RSpec.describe "search/home.html.erb" do
         expect(page).to have_content('Narrow your search by album or artist')
       end
 
-      it "The narrowed search fields display below inclusive search" do
-        expect(page.find('form > div#inclusive-search + div')['id']).to eq('narrowed-search')
-      end
-
       it "The narrowed search fields use responsive classes" do
         expect(page).to have_selector('div.form-group.row#narrowed-search')
       end
 
-      it "Has instructions" do
-        n_search = page.find('div#narrowed-search')
-        expect(n_search).to have_content("Select an artist or album to search within:")
-      end
-
       it "Has at least one responsive area to narrow search" do
         expect(page.find('div#narrowed-search')).to have_selector('div.form-group.row')
+      end
+
+      it "Has instructions" do
+        n_search = page.find('div#narrowed-search')
+        expect(n_search).to have_content("Search within:")
       end
 
       it "Contains radio buttons to narrow by artist or album" do
