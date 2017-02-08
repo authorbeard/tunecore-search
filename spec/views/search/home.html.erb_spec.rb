@@ -193,12 +193,24 @@ RSpec.describe "search/home.html.erb" do
 
       it "Has instructions" do
         n_search = page.find('div#narrowed-search')
+        expect(n_search).to have_selector("legend.col-form-legend")
+        expect(n_search).to have_content("Leave the keyword box blank to find all songs by artist, album or both.")
         expect(n_search).to have_content("Search within:")
       end
 
       it "Contains radio buttons to narrow by artist or album" do
         first_narrow = page.find("div#first-parameter")
         expect(first_narrow).to have_selector('input[type=radio]', :count=>2)
+      end
+
+      it "The radio buttons render inline" do
+        n_search = page.find('div#narrowed-search')
+        expect(n_search).to have_selector('.form-check-inline', :count=>2)
+      end
+
+      it "The radio buttons are labeled and responsive" do
+        first_param = page.find('div.form-group#first-parameter')
+        expect(first_param).to have_selector('label.form-check-label')
       end
 
       it "Contains a text box to search for album or artist name" do
