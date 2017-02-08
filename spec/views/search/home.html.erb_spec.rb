@@ -215,7 +215,6 @@ RSpec.describe "search/home.html.erb" do
 
       it "The radio buttons have the correct labels and values" do
         param_buttons = page.all('div#first-parameter .form-check-inline')
-    # byebug
         expect(param_buttons.all?{|button|
             button.find('input')['name'] == "search_within"
           }).to eq(true)
@@ -236,21 +235,13 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Correctly labels the name and value of the text box" do
-        expect(page).to have_selector('input[name=within[]for')
+        expect(page).to have_selector('input[id=narrow-query-string]')
       end
 
       it "Uses autocomplete in search parameter box" do
-        expect(page.all('input#first-parameter')['autocomplete']).to_not be(nil)
+        narrow_query = page.find('div#first-parameter')
+        expect(narrow_query).to have_selector('input.autocomplete')
       end
-
-
-
-
-
-
-
-
-
 
     end
 
