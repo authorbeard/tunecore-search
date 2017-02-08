@@ -179,7 +179,7 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Tells the user that this search cannot be used with inclusive search" do
-        expect(page.find('div#narrowed-search h1:nth-child(1)').to have_content('OR')
+        expect(page.find('div#narrowed-search h1:nth-child(1)')).to have_content('OR')
       end
 
       it "The narrowed search fields display below inclusive search" do
