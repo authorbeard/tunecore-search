@@ -178,6 +178,10 @@ RSpec.describe "search/home.html.erb" do
         expect(page).to have_selector("div#narrowed-search")
       end
 
+      it "Tells the user that this search cannot be used with inclusive search" do
+        expect(page.find('div#narrowed-search h1:nth-child(1)').to have_content('OR')
+      end
+
       it "The narrowed search fields display below inclusive search" do
         expect(page.find('form > div#inclusive-search + div')['id']).to eq('narrowed-search')
       end
@@ -186,17 +190,33 @@ RSpec.describe "search/home.html.erb" do
         expect(page).to have_selector('div.form-group.row#narrowed-search')
       end
 
-      it "Allows the user to narrow search by artist" do
-        narrow_search = page.find('div#narrowed-search')
-        expect(page).to have_selector('.whut')
+      it "Has instructions" do
+        n_search = page.find('div#narrowed-search')
+        expect(n_search).to have_content("Select an artist or album to search within:")
       end
 
-      it "Uses autocomplete populated with the names of artists in the database" do
-        byebug
-        10.times{ Artist.create!(name: Faker::Name.name) }
-        artists = Artist.pluck(:name)
-        byebug
+      it "Has at least one responsive area to narrow search" do
+        expect(page.find('div#narrowed-search')).to have_selector('div.form-group.row')
       end
+
+      it "Contains radio buttons to narrow by artist or album" do
+        first_narrow = page.find("div#first-parameter")
+        expect(first_narrow).to have_selector('input[type=radio]', :count=>2)
+      end
+
+      it "Contains a text box to search for album or artist name" do
+        first_narrow = page.find("div#first-parameter")
+        expect(first_narrow).to have_selector('input[type=search]')
+      end
+
+      it "Uses autocomplete in search parameter box" do
+        expect(page.all('input#first-parameter')['autocomplete']).to_not be(nil)
+      end
+
+
+
+
+
 
 
 

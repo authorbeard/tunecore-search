@@ -2,15 +2,17 @@
 
   <%= form_for "q", {url: '/search', method: "post",remote: "true", html: {role: "form"} } do |f| %>
 
-
     <div class="form-group row" id="search-input-group">
-      <label for="query-string" class="col-form-label">I'm searching for:</label>
+      <div class="col-sm-10">  
+        <label for="query-string" class="col-form-label">I'm searching for:</label>
 
-      <input type="search" id="query-string" class="form-control" value="" placeholder="keyword(s)"></input>
-      <small id="input-instructions">Separate each search term or phrase with a comma.</small>
+        <input type="search" id="query-string" class="form-control" value="" placeholder="keyword(s)"></input>
+        <small id="input-instructions">Separate each search term or phrase with a comma.</small>
+      </div>
     </div>
 
     <div class="form-group row" id="search-options">
+      <div class="col-sm-10">
         <legend class="col-form-legend">Search options: </legend>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
@@ -24,37 +26,39 @@
             Custom
           </label>
         </div>
+      </div>
     </div><!--search options selectors -->
     
     <div class="form-group row" id="inclusive-search" style="display:none;">
-      <legend class="col-form-legend">Search only in these fields:</legend>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" id="artist-name" value="artist-name"></input>
-          Artist Name
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" id="album-title" value="album-title"></input>
-          Album Title
-        </label>
-      </div>
-      <div class="form-check-inline">
-        <label class="form-check-label">
-          <input type="checkbox" class="form-check-input" id="song-title" value="song-title"></input>
-          Song Title
-        </label>
+      <div class="col-sm-10">  
+        <legend class="col-form-legend">Search only in these fields:</legend>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" id="artist-name" value="artist-name"></input>
+            Artist Name
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" id="album-title" value="album-title"></input>
+            Album Title
+          </label>
+        </div>
+        <div class="form-check-inline">
+          <label class="form-check-label">
+            <input type="checkbox" class="form-check-input" id="song-title" value="song-title"></input>
+            Song Title
+          </label>
+        </div>
       </div>
     </div><!--inclusive search options -->
 
-    <div class="form-group row" id="narrowed-search">
+    <div class="form-group row" id="narrowed-search" style="display:none;">
 
     </div><!--restrictive search options -->
 
 
     <%= button_tag "Search", type: "Submit",class: "btn btn-primary" %>
-
 
   <% end %>
 
