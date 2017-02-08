@@ -193,9 +193,9 @@ RSpec.describe "search/home.html.erb" do
 
       it "Has instructions" do
         n_search = page.find('div#narrowed-search')
-        expect(n_search).to have_selector("legend.col-form-legend")
         expect(n_search).to have_content("Leave the keyword box blank to find all songs by artist, album or both.")
-        expect(n_search).to have_content("Search within:")
+        legend = page.find("div#narrowed-search legend.col-form-legend")
+        expect(legend.text).to eq("Search within:")
       end
 
       it "Contains radio buttons to narrow by artist or album" do
