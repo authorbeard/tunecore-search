@@ -210,12 +210,33 @@ RSpec.describe "search/home.html.erb" do
 
       it "The radio buttons are labeled and responsive" do
         first_param = page.find('div.form-group#first-parameter')
-        expect(first_param).to have_selector('label.form-check-label')
+        expect(first_param).to have_selector('label.form-check-label', :count=>2)
+      end
+
+      it "The radio buttons have the correct labels and values" do
+        param_buttons = page.all('div#first-parameter .form-check-inline')
+    # byebug
+        expect(param_buttons.all?{|button|
+            button.find('input')['name'] == "search_within"
+          }).to eq(true)
+
+
+        expect(param_buttons[0].find('label').text).to eq("Artist")
+        expect(param_buttons[0].find('input')['id']).to eq("artist")
+        expect(param_buttons[0].find('input')['value']).to eq("artist")
+
+        expect(param_buttons[1].find('label').text).to eq("Album")
+        expect(param_buttons[1].find('input')['id']).to eq("album")
+        expect(param_buttons[1].find('input')['value']).to eq("album")
       end
 
       it "Contains a text box to search for album or artist name" do
         first_narrow = page.find("div#first-parameter")
         expect(first_narrow).to have_selector('input[type=search]')
+      end
+
+      it "Correctly labels the name and value of the text box" do
+        expect(page).to have_selector('input[name=within[]for')
       end
 
       it "Uses autocomplete in search parameter box" do

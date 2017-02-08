@@ -58,19 +58,26 @@
         <h1>OR</h1>
         <h4>Narrow your search by album or artist.</h4>
         <p>(Leave the keyword box blank to find all songs by artist, album or both.)</p>
-        <div class="form-group row">
+        <div class="form-group row" id="first-parameter">
           <div class="col-sm-10">
             <legend class="col-form-legend">
               Search within:
             </legend>
-
-
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="search_within" id="artist" value="artist" checked>
+                Artist
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name="search_within" id="album" value="album">
+                Album
+              </label>
+            </div>
           </div>
-        </div>
-
-
+        </div> <!-- first parameter group -->
       </div>
-
     </div><!--restrictive search options -->
 
 
