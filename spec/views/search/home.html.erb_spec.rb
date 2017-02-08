@@ -242,6 +242,34 @@ RSpec.describe "search/home.html.erb" do
         narrow_query = page.find('div#first-parameter')
         expect(narrow_query).to have_selector('input.autocomplete')
       end
+    end
+
+    context "Form interactions" do
+      before :example do
+
+        page.choose("Custom")
+      end
+
+      it "Shows search options when User clicks on Custom search radio button" do
+        expect(page).to have_selector('div#inclusive-search')
+        expect(page).to have_selector('div#narrowed-search')
+      end
+
+      it "Disables narrowed-search options when any inclusive-search box is checked" do
+        page.check("Artist")
+        expect(page.find('div#narrowed-search')['disabled']).to eq(true)
+      end
+
+      it "Clears and disables inclusive-search options when user types text into narrow-search field" do
+        page.fill_in('input.narrow-query-string', :with=>"artist")
+        inc_search = page.all('div#inclusive-search')
+        expect(inc_search.has_checked_field?).to be(false)
+        expect(inc_search.all('input').all?{|box|
+            box['disabled'] == true
+          })
+      end
+
+
 
     end
 

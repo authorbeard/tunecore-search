@@ -11,5 +11,18 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui
 //= require tether
 //= require bootstrap
+//= require 'search_form'
+
+$(document).ready(function(){
+  attachListeners();
+})
+
+function attachListeners(){
+  $('input#custom').click(displaySearchOpts);
+  $('input[name=search_within]').click(disableNarrowed);
+  $('input#narrow-query-string').click(disableInclusive);
+  $('form').submit(tunecoreSearch);
+}
