@@ -11,6 +11,7 @@ RSpec.describe SearchController do
       @artist2 = Artist.create(name: "beastie boys")
       @artist3 = Artist.create(name: "boys II men")
       @artist4 = Artist.create(name: "beach house")
+      @artist5 = Artist.create(name: "The Dreamers")
       @song1 = Song.create(name: "I've Been Waiting")
       @song2 = Song.create(name: "Dream River")
       @song3 = Song.create(name: "A River Runs Through It")
@@ -29,6 +30,11 @@ RSpec.describe SearchController do
     it "Responds with 200 status code to legitimate posts" do
       post :search, params: {:q=> {:search_opts=>"default", :query_string => "whut"}}, :format=>:json
       expect(response.status).to eq(200)
+    end
+
+    it "Returns the correct objects for default search" do
+      post :search, params: {:q=> {:search_opts=>"default", :query_string => "dream"}}, :format=>:json
+      byebug
     end
 
   end
