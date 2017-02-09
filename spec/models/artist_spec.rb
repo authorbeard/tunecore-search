@@ -45,7 +45,7 @@ RSpec.describe Artist do
     end
 
     it "It returns an array of objects" do
-      keywords=["zeppelin", "jay-z", "kanye"]
+      keywords="zeppelin, jay-z, kanye"]
       expect(Artist.search(keywords)).to be_an(Array)
       expect(Artist.search("bea")).to be_an(Array)
     end
@@ -61,10 +61,13 @@ RSpec.describe Artist do
       search3 = Artist.search("beach")
 
       expect(search1.length).to eq(3)
-      expect(search2.length).to eq(3)
-      expect(search3.length).to eq(2)
       expect(search1.include?(@artist3)).to be(false)
 
+      expect(search2.length).to eq(3)
+      expect(search2.include?(@artist3)).to be(true)
+
+      expect(search3.length).to eq(2)
+      expect(search3.include?(@artist1)).to be(true)
     end
 
     it "It can process multiple keywords" do

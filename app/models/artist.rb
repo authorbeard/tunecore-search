@@ -3,10 +3,18 @@ class Artist < ApplicationRecord
   has_many :songs, through: :albums
 
   def self.search(query)
+  byebug
     q=query.split(",").map{|string|
-      string = "%#{string}%"
+
+  byebug
+      string = "%#{string.strip}%"
     }
-    return group(:name).where("name LIKE ?", q).to_a
+
+    combined_results = q.map{|q_string|
+      group(:name).where("name LIKE ?", q).to_a
+    }
+
+    return combined_results
 
   end
 end
