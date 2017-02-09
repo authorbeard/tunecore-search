@@ -34,9 +34,41 @@ RSpec.describe Artist do
     expect(@artist.songs.count).to eq(10)
   end
 
-  it 'Has a search method' do
-    expect(Artist.respond_to?(:search)).to be(true)
+  context "Basic search" do
+
+    it 'Has a search method' do
+      expect(Artist.respond_to?(:search)).to be(true)
+    end
+
+    it "The search method accepts a string" do
+      expect(Artist.search("whut")).to be_truthy
+    end
+
+    it "The search method accepts an array of strings" do
+      keywords=["zeppelin", "jay-z", "kanye"]
+      expect(Artists.search(keywords)).to_not raise_error
+    end
+
+    it "The search method returns the correct results" do 
+      @artist1 = Artist.create(name: "beach boys")
+      @artist2 = Artist.create(name: "beastie boys")
+      @artist3 = Artist.create(name: "boys II men")
+      @artist4 = Artist.create(name: "beach house")
+
+      search1 = Artist.search("bea")
+      search2 = Artist.search("boys")
+      search3 = Artist.search("beach")
+
+      expect(search1.length).to eq(3)
+      expect(search2.length).to eq(3)
+      expect(search3.length).to eq(2)
+      expect(search1.includes?(@artist3)).to be(false)
+
+    end
+
   end
+
+
 
 
 
