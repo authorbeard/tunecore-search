@@ -9,19 +9,19 @@ RSpec.describe "search/home.html.erb", :js=>true do
       end
 
       it "Shows search options when User clicks on Custom search radio button", javascript:true do
-        page.choose("custom")
-     byebug   
+        page.choose("custom")  
         expect(page).to have_selector('div.search-opts', :count=>2)
       end
 
       it "Hides search options when User clicks back on Default search" do
-        page.choose("Custom")
+        page.choose("custom")
         page.choose("Default")
         expect(page).to have_selector('div.search-opts', :count=>2, :visible=>false)
       end
 
       it "Clears narrowed-search options when any inclusive-search box is checked" do
-        page.check("Artist")
+        page.choose('custom')   
+        page.check("artist-name")
         narrow_inputs = page.all('div#narrowed-search input')
         expect(narrow_inputs.all?{|input|
             input.value == nil
