@@ -36,17 +36,18 @@ RSpec.describe Artist do
 
   context "Basic search" do
 
-    it 'Has a search method' do
+    it 'The model has a search method' do
       expect(Artist.respond_to?(:search)).to be(true)
     end
 
-    it "The search method accepts a string" do
+    it "It accepts a string" do
       expect(Artist.search("whut")).to be_truthy
     end
 
-    it "The search method accepts an array of strings" do
+    it "It returns an array of objects" do
       keywords=["zeppelin", "jay-z", "kanye"]
-      expect(Artists.search(keywords)).to_not raise_error
+      expect(Artist.search(keywords)).to be_an(Array)
+      expect(Artist.search("bea")).to be_an(Array)
     end
 
     it "The search method returns the correct results" do 
@@ -62,8 +63,13 @@ RSpec.describe Artist do
       expect(search1.length).to eq(3)
       expect(search2.length).to eq(3)
       expect(search3.length).to eq(2)
-      expect(search1.includes?(@artist3)).to be(false)
+      expect(search1.include?(@artist3)).to be(false)
 
+    end
+
+    it "It can process multiple keywords" do
+      keywords=["zeppelin", "jay-z", "kanye"]
+      expect(Artist.search(keywords)).to_not raise_error
     end
 
   end
