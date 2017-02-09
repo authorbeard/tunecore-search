@@ -244,32 +244,7 @@ RSpec.describe "search/home.html.erb" do
       end
     end
 
-    context "Form interactions" do
-      before :example do
-        page.choose("Custom")
-      end
 
-      it "Shows search options when User clicks on Custom search radio button" do
-        expect(page).to have_selector('div.search-opts', :count=>2)
-      end
-
-      it "Clears narrowed-search options when any inclusive-search box is checked" do
-        page.check("Artist")
-        narrow_inputs = page.all('div#narrowed-search input')
-        expect(narrow_inputs.all?{|input|
-            input.value == nil
-          }).to be(true)
-      end
-
-      it "Clears inclusive-search options when user types text into narrow-search field" do
-        page.fill_in('input.narrow-query-string', :with=>"artist")
-        inclusive_inputs = page.all('div#inclusive-search inut')
-        expect(inc_search.has_checked_field?).to be(false)
-      end
-
-
-
-    end
 
   context "Search results" do
     

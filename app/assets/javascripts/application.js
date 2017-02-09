@@ -21,7 +21,8 @@ $(document).ready(function(){
 })
 
 function attachListeners(){
-  $('input#custom').click(displaySearchOpts);
+  $('input#custom').change(displaySearchOpts);
+  $('input#default').click(hideSearchOpts);
   $('input[name=search_within]').click(disableNarrowed);
   $('input#narrow-query-string').click(disableInclusive);
   $('form').submit(tunecoreSearch);
