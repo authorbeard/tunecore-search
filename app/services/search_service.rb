@@ -17,4 +17,25 @@ class SearchService
     return return_hash
   end
 
+  def custom(params)
+    if params["includes"]
+      byebug
+      table_names = get_table_names(params["includes"])
+      return true
+    else
+
+
+    end
+
+  end
+
+
+  private
+
+  def get_table_names(array)
+    return array.map{|item|
+      ActiveSupport::Inflector.classify(item).constantize
+    }
+  end
+
 end

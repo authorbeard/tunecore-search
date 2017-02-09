@@ -158,9 +158,9 @@ RSpec.describe "search/home.html.erb" do
             b['type'] == 'checkbox'
             b['name'] == 'q[includes][]'
           }).to be(true)
-        expect(check_boxes[0].value).to eq('artist')
-        expect(check_boxes[1].value).to eq('album')
-        expect(check_boxes[2].value).to eq('song')
+        expect(check_boxes[0].value).to eq('artists')
+        expect(check_boxes[1].value).to eq('albums')
+        expect(check_boxes[2].value).to eq('songs')
       end
 
       it "Check boxes should use responsive classes and render inline" do

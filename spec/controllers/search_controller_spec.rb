@@ -41,6 +41,14 @@ RSpec.describe SearchController do
       expect(results["albums"].any?{|album| album["name"] == "Teenage Daydream"}).to be(true)  
     end
 
+    it "Searches the correct tables for inclusive search" do
+      post :search, params: {:q=> {:search_opts=>"custom", :query_string => "dream", :includes=>["artist", "song"]}}, :format=>:json
+      results=JSON.parse(response.body)
+byebug
+      expect(results["albums"]).to be(nil)
+    end
+
+
   end
 
 
