@@ -22,12 +22,12 @@ RSpec.describe SearchController do
   describe "#search" do
 
     it "Responds to JSON requests" do
-      post :search, {:q => {:search_opts=>"default", :query_string => "whut"}, :format=>:json}
+      post :search, params: {:q=>{:search_opts=>"default", :query_string => "whut"}}, :format=>:json
       expect(response.content_type).to eq("application/json")
     end
 
-    it "Responds with 200 status code " do
-      post :search, {:q => {:search_opts=>"default", :query_string => "whut"}, :format=>:json}
+    it "Responds with 200 status code to legitimate posts" do
+      post :search, params: {:q=> {:search_opts=>"default", :query_string => "whut"}}, :format=>:json
       expect(response.status).to eq(200)
     end
 
