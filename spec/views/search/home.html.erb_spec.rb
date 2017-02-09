@@ -55,21 +55,26 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "The label has some content" do 
-        expect(page.find('label[for=query-string]').text).to_not eq("")
+        expect(page.find('label[for=q_query_string]').text).to_not eq("")
       end
 
       it "The search box refers to the correct value" do 
         search_box = page.find('div#search-input-group input')
-        expect(search_box['id']).to eq('query-string')
+        expect(search_box['id']).to eq('q_query_string')
+      end
+
+      it "The search box is named correctly to pass strong params structure" do
+        search_box = page.find('input#q_query_string')
+        expect(search_box['name']).to eq('q[query_string]')
       end
 
       it "The search box uses uses Bootstrap's responsive classes" do
-        search_box = page.find('input#query-string')
+        search_box = page.find('input#q_query_string')
         expect(search_box['class']).to eq('form-control')
       end
    
       it "The search box has placeholder text with additional instructions" do
-        search_box = page.find('input#query-string')
+        search_box = page.find('input#q_query_string')
         expect(search_box['placeholder']).to_not be(nil)
       end
 
@@ -108,6 +113,13 @@ RSpec.describe "search/home.html.erb" do
         search_opts = page.all('div.form-check')
         expect(search_opts[0].has_css?('input[checked]')).to be(true)
         expect(search_opts[1].has_css?('input[checked]')).to be(false)
+      end
+
+      it "Radio buttons are correctly nested to pass strong-params whitelist" do
+        search_opts = page.all('div#search-options input[type=radio]')
+        expect(search_opts.all?{|button|
+            button['name'] == 'q[search_opts]'
+          }).to be(true)
       end
     end
 
@@ -235,7 +247,7 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Correctly labels the name and value of the text box" do
-        expect(page).to have_selector('input[id=narrow-query-string]')
+        expect(page).to have_selector('input[id=narrow-query_string]')
       end
 
       it "Uses autocomplete in search parameter box" do
