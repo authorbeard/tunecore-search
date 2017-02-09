@@ -34,7 +34,11 @@ RSpec.describe SearchController do
 
     it "Returns the correct objects for default search" do
       post :search, params: {:q=> {:search_opts=>"default", :query_string => "dream"}}, :format=>:json
-      byebug
+      results=JSON.parse(response.body)
+
+      expect(results["songs"].any?{|song| song["name"] == "Dream River"}).to be(true)
+      expect(results["songs"].any?{|song| song["name"] == "Teenage Daydream"}).to be(false)
+      expect(results["albums"].any?{|album| album["name"] == "Teenage Daydream"}).to be(true)  
     end
 
   end

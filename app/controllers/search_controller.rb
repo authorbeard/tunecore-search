@@ -7,7 +7,6 @@ class SearchController < ApplicationController
   def search
     search=SearchService.new
     search_results = search.send(search_params["search_opts"], search_params)
-byebug
     respond_to do |format|
       format.html
       format.json {render json: search_results}
