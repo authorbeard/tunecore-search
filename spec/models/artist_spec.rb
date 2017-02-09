@@ -34,6 +34,9 @@ RSpec.describe Artist do
     expect(@artist.songs.count).to eq(10)
   end
 
+  it 'Has a search method' do
+    expect(Artist.respond_to?(:search)).to be(true)
+  end
 
 
 

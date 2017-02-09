@@ -15,5 +15,9 @@ RSpec.describe Song do
     expect(@song.artist).to_not be(nil) 
   end
 
+  it 'Has a search method' do
+    expect(Song.respond_to?(:search)).to be(true)
+  end
+
 
 end
