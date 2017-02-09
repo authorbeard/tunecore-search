@@ -18,15 +18,15 @@ RSpec.describe "search/home.html.erb", :js=>true do
       end
 
       it "Clears narrowed-search options when any inclusive-search box is checked" do 
-        page.fill_in('narrow-query-string', :with=>"test")  
-        page.check("artist-name")
+        page.fill_in('q_narrow_query', :with=>"test")  
+        page.check("Artist Name")
         narrow_inputs = page.all('div#narrowed-search input')
         expect(narrow_inputs.first.selected?).to be(false)
         expect(narrow_inputs[2].text).to eq("")
       end
 
       it "Clears inclusive-search options when user types text into narrow-search field" do
-        page.fill_in('narrow-query-string', :with=>"artist")
+        page.fill_in('q_narrow_query', :with=>"artist")
         inclusive_inputs = page.all('div#inclusive-search input')
         expect(inclusive_inputs.all?{|checkbox|
             checkbox.selected? == false
