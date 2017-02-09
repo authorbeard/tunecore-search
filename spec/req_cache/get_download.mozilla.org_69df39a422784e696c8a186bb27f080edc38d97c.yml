@@ -1,0 +1,14 @@
+---
+:scope: 
+:url: http://download.mozilla.org/?product=firefox-37.0.2-complete&os=osx&lang=en-US
+:body: ''
+:status: 302
+:method: get
+:headers:
+  Cache-Control: max-age=60
+  Content-Type: text/html; charset=utf-8
+  Date: Thu, 09 Feb 2017 13:57:46 GMT
+  Location: http://download.cdn.mozilla.net/pub/firefox/releases/37.0.2/update/mac/en-US/firefox-37.0.2.complete.mar
+  Content-Length: '127'
+  Connection: close
+:content: "<a href=\"http://download.cdn.mozilla.net/pub/firefox/releases/37.0.2/update/mac/en-US/firefox-37.0.2.complete.mar\">Found</a>.\n\n"

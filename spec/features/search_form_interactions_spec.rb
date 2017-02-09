@@ -1,7 +1,6 @@
 require 'rails_helper'
 require 'capybara/rails'
 
-
 RSpec.describe "search/home.html.erb", :js=>true do
     context "Form interactions" do
       before :each do
@@ -35,11 +34,6 @@ RSpec.describe "search/home.html.erb", :js=>true do
         expect(inclusive_inputs.all?{|checkbox|
             checkbox.selected? == false
         }).to be(true)
-
       end
-
-
-
     end
-
 end

@@ -1,12 +1,11 @@
 <div class="container">
 
-  <%= form_for "q", {url: '/search', method: "post",remote: "true", html: {role: "form"} } do |f| %>
+  <%= form_for :q, {url: '/search'} do |f| %>
 
     <div class="form-group row" id="search-input-group">
       <div class="col-sm-10">  
-        <label for="query-string" class="col-form-label">I'm searching for:</label>
-
-        <input type="search" id="query-string" class="form-control" value="" placeholder="keyword(s)"></input>
+        <%= label_tag "query-string", "I'm searching for:", class: 'col-form-label' %>
+        <%= f.text_field :query_string, { class: 'form-control', placeholder: 'keyword(s)'} %>
         <small id="input-instructions">Separate each search term or phrase with a comma.</small>
       </div>
     </div>
@@ -15,16 +14,19 @@
       <div class="col-sm-10">
         <legend class="col-form-legend">Search options: </legend>
         <div class="form-check form-check-inline">
+      
           <label class="form-check-label">
             <input class="form-check-input" type="radio" name="searchOpts" id="default" value="default" checked>
             Default
           </label>
+
         </div>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
             <input class="form-check-input" type="radio" name="searchOpts" id="custom" value="custom">
             Custom
           </label>
+
         </div>
       </div>
     </div><!--search options selectors -->
@@ -32,24 +34,26 @@
     <div class="form-group row search-opts" id="inclusive-search" style="display:none;">
       <div class="col-sm-10">  
         <legend class="col-form-legend">Search only in these fields:</legend>
-        <div class="form-check-inline">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="artist-name" value="artist-name"></input>
-            Artist Name
-          </label>
-        </div>
-        <div class="form-check-inline">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="album-title" value="album-title"></input>
-            Album Title
-          </label>
-        </div>
-        <div class="form-check-inline">
-          <label class="form-check-label">
-            <input type="checkbox" class="form-check-input" id="song-title" value="song-title"></input>
-            Song Title
-          </label>
-        </div>
+
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" id="artist-name" value="artist-name" name="includes[]"></input>
+                Artist Name
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" id="album-title" value="album-title" name="includes[]"></input>
+                Album Title
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="checkbox" class="form-check-input" id="song-title" value="song-title" name="includes[]"></input>
+                Song Title
+              </label>
+            </div>
+
       </div>
     </div><!--inclusive search options -->
 
@@ -65,7 +69,7 @@
             </legend>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="search_within" id="artist" value="artist" checked>
+                <input class="form-check-input" type="radio" name="search_within" id="artist" value="artist">
                 Artist
               </label>
             </div>

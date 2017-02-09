@@ -26,6 +26,6 @@ function clearNarrowed(){
 }
 
 
-function tunecoreSearch(){
-
+function tunecoreSearch(event){
+debugger;
 }
