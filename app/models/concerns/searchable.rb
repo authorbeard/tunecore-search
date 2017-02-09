@@ -1,7 +1,6 @@
 module Searchable
 
   def search(query)
- 
     q=query.split(",").map{|string|
       string = "%#{string.strip}%"
     }
@@ -10,6 +9,9 @@ module Searchable
       where("name LIKE ?", q_string).to_a
     }
     return combined_results.flatten
+  end
+
+  def narrow_search(query)
 
   end
 

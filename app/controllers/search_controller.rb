@@ -5,8 +5,11 @@ class SearchController < ApplicationController
   end
 
   def search
-byebug
-    render json: params[:q]
+
+    respond_to do |format|
+      format.html
+      format.json {render json: params[:q]}
+    end
   end
 
 
