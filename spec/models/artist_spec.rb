@@ -44,11 +44,18 @@ RSpec.describe Artist do
       expect(Artist.search("whut")).to be_truthy
     end
 
-    it "It returns an array of objects" do
-      keywords="zeppelin, jay-z, kanye"]
-      expect(Artist.search(keywords)).to be_an(Array)
-      expect(Artist.search("bea")).to be_an(Array)
+    it "It returns an array of Artist objects" do
+      Artist.create([
+          {name: "Radiohead"},
+          {name: "Motorhead"}
+        ])
+
+      search = Artist.search('head')
+      expect(search).to be_an(Array)
+      expect(search.length).to eq(2)
     end
+
+
 
     it "The search method returns the correct results" do 
       @artist1 = Artist.create(name: "beach boys")
@@ -71,8 +78,16 @@ RSpec.describe Artist do
     end
 
     it "It can process multiple keywords" do
-      keywords=["zeppelin", "jay-z", "kanye"]
-      expect(Artist.search(keywords)).to_not raise_error
+      Artist.create([
+          {name: "Led Zeppelin"},
+          {name: "Jay-Z"},
+          {name: "Kanye West"},
+          {name: "Beyonce"}
+        ])
+      keywords="zeppelin, jay-z, kanye"
+      search = Artist.search(keywords)
+      expect(search.length).to eq(3)
+      expect(search.include?(Artist.find_by(name: "Beyonce"))).to be(false)
     end
 
   end
