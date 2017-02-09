@@ -231,16 +231,16 @@ RSpec.describe "search/home.html.erb" do
       it "The radio buttons have the correct labels and values" do
         param_buttons = page.all('div#first-parameter .form-check-inline')
         expect(param_buttons.all?{|button|
-            button.find('input')['name'] == "q[search_within]"
+            button.find('input')['name'] == "q[narrow_by]"
           }).to eq(true)
 
 
         expect(param_buttons[0].find('label').text).to eq("Artist")
-        expect(param_buttons[0].find('input')['id']).to eq("q_search_within_artist")
+        expect(param_buttons[0].find('input')['id']).to eq("q_narrow_by_artist")
         expect(param_buttons[0].find('input')['value']).to eq("artist")
 
         expect(param_buttons[1].find('label').text).to eq("Album")
-        expect(param_buttons[1].find('input')['id']).to eq("q_search_within_album")
+        expect(param_buttons[1].find('input')['id']).to eq("q_narrow_by_album")
         expect(param_buttons[1].find('input')['value']).to eq("album")
       end
 

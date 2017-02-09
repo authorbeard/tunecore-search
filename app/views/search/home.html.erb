@@ -68,13 +68,13 @@
             </legend>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <%= f.radio_button :search_within, "artist", {class: 'form-check-input', checked: true} %>
+                <%= f.radio_button :narrow_by, "artist", {class: 'form-check-input', checked: true} %>
                 Artist
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <%= f.radio_button :search_within, "album", {class: 'form-check-input'} %>
+                <%= f.radio_button :narrow_by, "album", {class: 'form-check-input'} %>
                 Album
               </label>
             </div>
