@@ -5,7 +5,7 @@ class SearchService
   end
 
   def default(params)
-byebug
+# byebug
   end
 
 end

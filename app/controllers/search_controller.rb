@@ -5,7 +5,7 @@ class SearchController < ApplicationController
   end
 
   def search
-    byebug
+    # byebug
     search=SearchService.new
     search.send(search_params["search_opts"], search_params)
 

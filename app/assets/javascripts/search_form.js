@@ -27,7 +27,6 @@ function clearNarrowed(){
 
 
 function tunecoreSearch(event){
-// debugger;
   event.preventDefault();
   params = $(this).serialize()
   var search = $.post('/search', params, function(data){
