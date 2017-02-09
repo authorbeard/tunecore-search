@@ -23,7 +23,7 @@ $(document).ready(function(){
 function attachListeners(){
   $('input#custom').change(displaySearchOpts);
   $('input#default').click(hideSearchOpts);
-  $('input[name=search_within]').click(disableNarrowed);
-  $('input#narrow-query-string').click(disableInclusive);
+  $('div#inclusive-search input[type=checkbox]').click(clearNarrowed);
+  $('input#narrow-query-string').keydown(clearInclusive);
   $('form').submit(tunecoreSearch);
 }
