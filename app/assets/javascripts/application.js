@@ -22,7 +22,7 @@ $(document).ready(function(){
 
 function attachListeners(){
   $('input[value=custom]').change(displaySearchOpts);
-  $('input#default').click(hideSearchOpts);
+  $('input[value=default]').change(hideSearchOpts);
   $('div#inclusive-search input[type=checkbox]').click(clearNarrowed);
   $('input#narrow-query-string').keydown(clearInclusive);
   $('form').submit(tunecoreSearch);

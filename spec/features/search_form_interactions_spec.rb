@@ -14,7 +14,7 @@ RSpec.describe "search/home.html.erb", :js=>true do
 
       it "Hides search options when User clicks back on Default search" do
         page.choose("Default")
-        expect(page).to have_selector('div.search-opts', :count=>2, :visible=>false)
+        expect(page).to_not have_selector('div.search-opts')
       end
 
       it "Clears narrowed-search options when any inclusive-search box is checked" do 
