@@ -231,26 +231,34 @@ RSpec.describe "search/home.html.erb" do
       it "The radio buttons have the correct labels and values" do
         param_buttons = page.all('div#first-parameter .form-check-inline')
         expect(param_buttons.all?{|button|
-            button.find('input')['name'] == "search_within"
+            button.find('input')['name'] == "q[search_within]"
           }).to eq(true)
 
 
         expect(param_buttons[0].find('label').text).to eq("Artist")
-        expect(param_buttons[0].find('input')['id']).to eq("artist")
+        expect(param_buttons[0].find('input')['id']).to eq("q_search_within_artist")
         expect(param_buttons[0].find('input')['value']).to eq("artist")
 
         expect(param_buttons[1].find('label').text).to eq("Album")
-        expect(param_buttons[1].find('input')['id']).to eq("album")
+        expect(param_buttons[1].find('input')['id']).to eq("q_search_within_album")
         expect(param_buttons[1].find('input')['value']).to eq("album")
+      end
+
+      it "The narrowed-search radio buttons use responsive classes" do
+        inc_search_buttons = page.all('div#narrowed-search div#first-parameter input')
+        expect(inc_search_buttons.all?{|button|
+            button['class'] == 'form-check-input'
+
+          }).to be(true)
       end
 
       it "Contains a text box to search for album or artist name" do
         first_narrow = page.find("div#first-parameter")
-        expect(first_narrow).to have_selector('input[type=search]')
+        expect(first_narrow).to have_selector('input[type=text]')
       end
 
       it "Correctly labels the name and value of the text box" do
-        expect(page).to have_selector('input[id=narrow-query_string]')
+        expect(page).to have_selector('input[id=narrow_query_string]')
       end
 
       it "Uses autocomplete in search parameter box" do

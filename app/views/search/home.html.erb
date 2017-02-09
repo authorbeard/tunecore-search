@@ -68,13 +68,15 @@
             </legend>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="search_within" id="artist" value="artist">
+                <%= f.radio_button :search_within, "artist" %>
+                <!-- <input class="form-check-input" type="radio" name="search_within" id="artist" value="artist"> -->
                 Artist
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input" type="radio" name="search_within" id="album" value="album">
+                <%= f.radio_button :search_within, "album" %>
+        <!--         <input class="form-check-input" type="radio" name="search_within" id="album" value="album"> -->
                 Album
               </label>
             </div>
