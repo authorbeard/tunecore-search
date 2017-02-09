@@ -30,6 +30,10 @@ RSpec.describe Album do
     expect(@album.songs.first.artist).to eq(@album.artist)
   end
 
+  it 'Has a search method' do
+    expect(Album.respond_to?(:search)).to be(true)
+  end
+
 
   
 end
