@@ -8,7 +8,7 @@ RSpec.describe "search/home.html.erb", :js=>true do
       end
 
       it "Shows search options when User clicks on Custom search radio button", javascript:true do
-        page.choose("custom")  
+        page.choose("Custom")  
         expect(page).to have_selector('div.search-opts', :count=>2)
       end
 
