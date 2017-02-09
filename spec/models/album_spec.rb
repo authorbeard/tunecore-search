@@ -46,7 +46,7 @@ RSpec.describe Album do
           {name: "Marquee Moon"}
         ])
 
-      search = Album.search('head')
+      search = Album.search('moon')
       expect(search).to be_an(Array)
       expect(search.length).to eq(2)
     end
@@ -67,7 +67,7 @@ RSpec.describe Album do
       expect(search1.include?(@album4)).to be(false)
 
       expect(search2.length).to eq(2)
-      expect(search2.include?(@album2)).to be(true)
+      expect(search2.include?(@album4)).to be(true)
 
     end
 
@@ -79,7 +79,7 @@ RSpec.describe Album do
           {name: "When Disaster Strikes"}
         ])
       keywords="blue, messiah"
-      search = Artist.search(keywords)
+      search = Album.search(keywords)
       expect(search.length).to eq(3)
       expect(search.include?(Album.find_by(name: "When Disaster Strikes"))).to be(false)
     end
