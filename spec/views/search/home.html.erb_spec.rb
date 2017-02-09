@@ -100,7 +100,7 @@ RSpec.describe "search/home.html.erb" do
         search_opts = page.all('div.form-check')
         expect(
           search_opts.all?{|el|
-            expect(el).to have_selector('label input.form-check-input')
+            expect(el).to have_selector('input.form-check-input')
           })
           .to be(true)
       end
@@ -163,12 +163,15 @@ RSpec.describe "search/home.html.erb" do
         expect(labels[2].text).to eq("Song Title")      
       end
 
-      it "Check boxes should actually refer to fields" do
-        checkboxes = page.all('div#inclusive-search label')
-        checkboxes.each {|box|  
-          expect(box.find('input')['id']).to eq(box.text.parameterize)
-          expect(box.find('input')['value']).to eq(box.text.parameterize)
-        }
+      it "Check boxes should be named correctly to pass strong-params whitelist" do
+        check_boxes = page.all("div#inclusive-search input")
+        expect(check_boxes.all?{|b| 
+            b['type'] == 'checkbox'
+            b['name'] == 'q[includes][]'
+          }).to be(true)
+        expect(check_boxes[0].value).to eq('artist')
+        expect(check_boxes[1].value).to eq('album')
+        expect(check_boxes[2].value).to eq('song')
       end
 
       it "The inclusive search checkboxes should be invisible on load" do   

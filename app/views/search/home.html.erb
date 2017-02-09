@@ -14,16 +14,15 @@
       <div class="col-sm-10">
         <legend class="col-form-legend">Search options: </legend>
         <div class="form-check form-check-inline">
-      
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="searchOpts" id="default" value="default" checked>
+            <%=f.radio_button :search_opts, "default", {class: 'form-check-input', checked: true} %>
             Default
           </label>
 
         </div>
         <div class="form-check form-check-inline">
           <label class="form-check-label">
-            <input class="form-check-input" type="radio" name="searchOpts" id="custom" value="custom">
+            <%=f.radio_button :search_opts, "custom", {class: 'form-check-input'} %>
             Custom
           </label>
 
