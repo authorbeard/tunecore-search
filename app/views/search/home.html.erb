@@ -36,19 +36,22 @@
 
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" id="artist-name" value="artist-name" name="includes[]"></input>
+                <%= f.check_box :includes, {multiple: true}, "artist", nil %>
+<!--                 <input type="checkbox" class="form-check-input" id="artist-name" value="artist-name" name="includes[]"></input> -->
                 Artist Name
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" id="album-title" value="album-title" name="includes[]"></input>
+                <%= f.check_box :includes, {multiple: true}, "album", nil %>
+<!--                 <input type="checkbox" class="form-check-input" id="album-title" value="album-title" name="includes[]"></input> -->
                 Album Title
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="checkbox" class="form-check-input" id="song-title" value="song-title" name="includes[]"></input>
+                <%= f.check_box :includes, {multiple: true}, "song", nil %>
+<!--                 <input type="checkbox" class="form-check-input" id="song-title" value="song-title" name="includes[]"></input> -->
                 Song Title
               </label>
             </div>

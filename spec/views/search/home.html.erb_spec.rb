@@ -140,27 +140,16 @@ RSpec.describe "search/home.html.erb" do
         expect(page).to have_selector('div.form-group.row#inclusive-search')
       end
 
-      it "Inclusive search should include check boxes for each model" do
-        inc_search=page.find('div#inclusive-search')
-        expect(inc_search).to have_selector('input.form-check-input[type=checkbox]', :count=>3)
-      end
-
-      it "Check boxes should use responsive classes and render inline" do
-        inc_search=page.find('div#inclusive-search')
-        expect(inc_search).to have_selector('div.form-check-inline', :count=>3)
-
-        form_checks = inc_search.all('div.form-check-inline')
-        form_checks.each{|div| 
-          expect(div).to have_selector('label.form-check-label')
-          expect(div).to have_selector('label input.form-check-input')
-        }
-      end
-
-      it "Labels should list all available search fields" do
+      it "Inclusive search options should be labeled with available search fields" do
         labels = page.all('div#inclusive-search label')   
         expect(labels.first.text).to eq("Artist Name")
         expect(labels[1].text).to eq("Album Title")
         expect(labels[2].text).to eq("Song Title")      
+      end
+
+      it "Inclusive search should include check boxes for each model" do
+        inc_search=page.find('div#inclusive-search')
+        expect(inc_search).to have_selector('input[type=checkbox]', :count=>3)
       end
 
       it "Check boxes should be named correctly to pass strong-params whitelist" do
@@ -172,6 +161,17 @@ RSpec.describe "search/home.html.erb" do
         expect(check_boxes[0].value).to eq('artist')
         expect(check_boxes[1].value).to eq('album')
         expect(check_boxes[2].value).to eq('song')
+      end
+
+      it "Check boxes should use responsive classes and render inline" do
+        inc_search=page.find('div#inclusive-search')
+        expect(inc_search).to have_selector('div.form-check-inline', :count=>3)
+
+        form_checks = inc_search.all('div.form-check-inline')
+        form_checks.each{|div| 
+          expect(div).to have_selector('label.form-check-label')
+          expect(div).to have_selector('label input.form-check-input')
+        }
       end
 
       it "The inclusive search checkboxes should be invisible on load" do   
