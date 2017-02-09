@@ -245,11 +245,15 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "The narrowed-search radio buttons use responsive classes" do
-        inc_search_buttons = page.all('div#narrowed-search div#first-parameter input')
+        inc_search_buttons = page.all('div#narrowed-search div#first-parameter input[type=radio]')
         expect(inc_search_buttons.all?{|button|
-            button['class'] == 'form-check-input'
-
+            button['class'] == "form-check-input"
           }).to be(true)
+      end
+
+      it "Selects Artist by default" do
+        narrow_artist = page.find('div#narrowed-search input[value=artist]')
+        expect(narrow_artist.checked?).to be(true)
       end
 
       it "Contains a text box to search for album or artist name" do
