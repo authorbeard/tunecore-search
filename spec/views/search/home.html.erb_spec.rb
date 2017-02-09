@@ -262,24 +262,19 @@ RSpec.describe "search/home.html.erb" do
       end
 
       it "Correctly labels the name and value of the text box" do
-        expect(page).to have_selector('input[id=narrow_query_string]')
+        expect(page).to have_selector('input#q_narrow_query')
       end
 
-      it "Uses autocomplete in search parameter box" do
-        narrow_query = page.find('div#first-parameter')
-        expect(narrow_query).to have_selector('input.autocomplete')
+      it "Uses Bootstrap's form-control class on narrow-query box" do
+        n_query = page.find('input#q_narrow_query')
+        expect(n_query['class']).to eq('form-control')
       end
+
+      # it "Uses autocomplete in search parameter box" do
+      #   narrow_query = page.find('div#first-parameter')
+      #   expect(narrow_query).to have_selector('input.autocomplete')
+      # end
     end
-
-
-
-  context "Search results" do
-    
-    it "The Search Results section follows grid design pattern" do
-      expect(page).to have_selector('.container div.row#search-results', :visible=>false)
-    end
-
-  end
 
 end
 
