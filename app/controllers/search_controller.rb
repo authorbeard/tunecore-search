@@ -5,6 +5,9 @@ class SearchController < ApplicationController
   end
 
   def search
+    byebug
+    search=SearchService.new
+    search.send(search_params["search_opts"], search_params)
 
     respond_to do |format|
       format.html
@@ -16,7 +19,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.require(:q).permit(:query_string, :narrow_query, search_opts: [], includes: [], narrow_by: [])
+    params.require(:q).permit(:query_string, :narrow_by, :narrow_query, :search_opts, :includes=>[])
 
   end
 

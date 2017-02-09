@@ -1,8 +1,10 @@
 class SearchService
 
 
-  def default(params)
+  def initialize
+  end
 
+  def default(params)
 byebug
   end
 
