@@ -17,6 +17,7 @@ RSpec.describe SearchController do
       @song3 = Song.create(name: "A River Runs Through It")
       @song4 = Song.create(name: "Thirteen Songs")
       @song5 = Song.create(name: "Waiting Room")
+      @song6 = Song.create(name: "Beach Boys Song")
     end
 
 
@@ -73,8 +74,9 @@ RSpec.describe SearchController do
     it "Searches the correct tables for inclusive search" do
       post :search, params: {:q=> {:search_opts=>"custom", :query_string => "dream", :includes=>["artist", "song"]}}, :format=>:json
       results=JSON.parse(response.body)
-      expect(results.length).to eq(2)
 byebug
+      expect(results.length).to eq(1)
+      expect(results.none?{|r| r['album'] != nil }).to be true
     end
 
 

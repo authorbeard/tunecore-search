@@ -15,13 +15,17 @@ class SearchService
 
   def custom(params)
     if params["includes"]
-  byebug
       tables = get_table_names(params["includes"])
-      return_hash = {}
-      params["includes"].each_with_index{|item, index|
-          return_hash[item] = tables[index].search(params["query_string"])
-        }
-      return return_hash
+      results =[]
+      tables.each{|t|
+        if t == Song 
+          results << Song.search(params["query_string"])
+        else
+          ids = t.song_ids(params["query_string"])
+          results << Song.find(ids)
+        end
+      }
+      return results.flatten
     else
 
 
