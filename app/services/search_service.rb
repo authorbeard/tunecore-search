@@ -8,7 +8,8 @@ class SearchService
     query = params["query_string"]
     songs_from_artists = Artist.song_ids(query)
     songs_from_albums = Album.song_ids(query)
-    songs=Song.search(query) << Song.find(songs_from_albums, songs_from_artists)
+
+    songs=Song.search(query) << Song.find([songs_from_albums, songs_from_artists].flatten)
     return songs.flatten
   end
 
