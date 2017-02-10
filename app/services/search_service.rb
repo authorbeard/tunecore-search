@@ -27,9 +27,14 @@ class SearchService
       }
       return results.flatten
     else
-      base = params["narrow_by"]
-
-
+byebug  
+      base = get_table_names([params["narrow_by"]]).first
+      target = base.search(params['narrow_query']).pop
+      album_matches = target.albums.song_ids(params['query_string'])
+      results = target.songs.search(params["query_string"])
+      results << Song.find(album_matches)
+      return results.flatten
+  byebug
 
     end
 
