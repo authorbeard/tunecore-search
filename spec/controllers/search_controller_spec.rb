@@ -62,6 +62,14 @@ RSpec.describe SearchController do
       expect(results.all?{|song| song["name"].downcase.include?("thirteen")}).to be(false)
     end
 
+    it "Doesn't include any artists or albums when there are no matches" do
+      post :search, params: {:q=> {:search_opts=>"default", :query_string => "through"}}, :format=>:json
+      results = JSON.parse(response.body)
+
+      expect(results.length).to eq(1)
+      expect(results.any?{|r| r["album"] != nil }).to be(false)
+    end
+
     it "Searches the correct tables for inclusive search" do
       post :search, params: {:q=> {:search_opts=>"custom", :query_string => "dream", :includes=>["artist", "song"]}}, :format=>:json
       results=JSON.parse(response.body)
