@@ -45,14 +45,12 @@ function processResponse(resp){
 
   
   if ($.isEmptyObject(resp)){
-    return $('#search-results').html('<h1>Sorry, couldn\'t find anything.</h1>');
+    // return $('#search-results').html('<h1>Sorry, couldn\'t find anything.</h1>');
+    return;
   }
   resp.forEach(function(el){
     $('#song-title div').append('<p>' + el.name + '</p>');
     $('#album-title div').append('<p>' + el.album['name'] + '</p>');
     $('#artist-name div').append('<p>' + el.artist['name'] + '</p>');
-    // debugger;
-
-
   })
 }
