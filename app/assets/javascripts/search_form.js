@@ -38,8 +38,7 @@ function tunecoreSearch(event){
 
 function processResponse(resp){
   $('#results-display div.result').each(function(){
-    // this.html("")
-    debugger;
+    $(this).html("");
   });
 
   $('#search-results').show();
