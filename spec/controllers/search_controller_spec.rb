@@ -78,14 +78,15 @@ RSpec.describe SearchController do
       expect(results.length).to eq(1)
       expect(results.none?{|r| r['album'] != nil }).to be true
 
-      @artist5.songs << @song1
+      @album3.songs << @song1
+      @artist5.albums << @album3
       @artist5.save
 
       post :search, params: {:q=> {:search_opts=>"custom", :query_string => "dream", :includes=>["artist", "song"]}}, :format=>:json
       results=JSON.parse(response.body)
 byebug
       expect(results.length).to eq(2)
-      expect(results.none?{|r| r['album'] != nil }).to be true
+      expect(results.none?{|r| r['album'] != nil }).to be false
 
     end
 
