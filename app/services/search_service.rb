@@ -14,15 +14,21 @@ class SearchService
       "albums": albums,
       "artists": artists
     }
-    return return_hash
+    # return return_hash
+    return [songs, albums, artists].flatten
   end
 
   def custom(params)
     if params["includes"]
-      byebug
-      table_names = get_table_names(params["includes"])
-      return true
+  byebug
+      tables = get_table_names(params["includes"])
+      return_hash = {}
+      params["includes"].each_with_index{|item, index|
+          return_hash[item] = tables[index].search(params["query_string"])
+        }
+      return return_hash
     else
+
 
 
     end
@@ -33,7 +39,7 @@ class SearchService
   private
 
   def get_table_names(array)
-    return array.map{|item|
+    return array.collect{|item|
       ActiveSupport::Inflector.classify(item).constantize
     }
   end

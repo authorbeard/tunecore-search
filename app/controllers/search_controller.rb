@@ -2,9 +2,11 @@ class SearchController < ApplicationController
   self.per_form_csrf_tokens = true
 
   def home
+    @artists = Artist.all
   end
 
   def search
+  byebug
     search=SearchService.new
     search_results = search.send(search_params["search_opts"], search_params)
     respond_to do |format|
