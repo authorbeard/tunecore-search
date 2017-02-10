@@ -79,6 +79,7 @@
               </label>
             </div>
             <%=f.text_field :narrow_query, class: 'form-control' %>
+            <%=f.collection_select :narrow_query, @artists, :id, :name %>
           </div>
         </div> <!-- first parameter group -->
       </div>

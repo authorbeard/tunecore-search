@@ -33,6 +33,11 @@ RSpec.describe SearchController do
       expect(response.status).to eq(200)
     end
 
+    it "sends a 400 if it gets sent bad params" do
+      post :search, params: {:q=>{:bad_param=>"bad"}}
+      expect(response.status).to eq(400)
+    end
+
     it "Returns the correct objects for default search" do
       post :search, params: {:q=> {:search_opts=>"default", :query_string => "dream"}}, :format=>:json
       results=JSON.parse(response.body)
@@ -84,11 +89,12 @@ RSpec.describe SearchController do
 
       post :search, params: {:q=> {:search_opts=>"custom", :query_string => "dream", :includes=>["artist", "song"]}}, :format=>:json
       results=JSON.parse(response.body)
-byebug
+
       expect(results.length).to eq(2)
       expect(results.none?{|r| r['album'] != nil }).to be false
-
     end
+
+
 
 
   end

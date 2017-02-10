@@ -6,6 +6,8 @@ class SearchController < ApplicationController
   end
 
   def search
+    # byebug
+    redirect_to home_path, status: 400 and return if search_params.empty?
     search=SearchService.new
     search_results = search.send(search_params["search_opts"], search_params)
     render json: search_results
