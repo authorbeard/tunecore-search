@@ -123,7 +123,7 @@ RSpec.describe SearchController do
 
       post :search, params: {:q=> {:search_opts=>"custom", :query_string => "waiting", :narrow_by=>"album", :narrow_query=>"thirteen songs"}}, :format=>:json
       results = JSON.parse(response.body)
-byebug
+# byebug
       expect(results.length).to eq(1)
       expect(results.first['name']).to eq("Waiting Room")
 
