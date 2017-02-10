@@ -19,6 +19,4 @@ class SearchController < ApplicationController
     params.require(:q).permit(:query_string, :narrow_by, :narrow_query, :search_opts, :includes=>[])
   end
 
-
-
 end
