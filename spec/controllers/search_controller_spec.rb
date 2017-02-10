@@ -94,7 +94,7 @@ RSpec.describe SearchController do
       expect(results.none?{|r| r['album'] != nil }).to be false
     end
 
-    it "Correctly narrows queries by artist" do
+    it "Correctly narrows queries by artist or by album" do
       @album1.songs << @song1
       @artist1.albums << @album1
       @artist1.save
@@ -109,28 +109,14 @@ RSpec.describe SearchController do
       expect(results.length).to eq(1)
       expect(results.first['name']).to eq("I've Been Waiting")
       expect(results.first['name']).to_not eq("Waiting Room")
-
-    end
-
-    it "Correctly narrows queries by album" do
-      @album1.songs << @song1
-      @artist1.albums << @album1
-      @artist1.save!
-
-      @album4.songs << @song5
-      @artist4.albums << @album4
-      @artist4.save!
-
+      
       post :search, params: {:q=> {:search_opts=>"custom", :query_string => "waiting", :narrow_by=>"album", :narrow_query=>"thirteen songs"}}, :format=>:json
       results = JSON.parse(response.body)
-# byebug
+
       expect(results.length).to eq(1)
       expect(results.first['name']).to eq("Waiting Room")
 
     end
-
-
-
 
   end
 

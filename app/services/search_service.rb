@@ -27,11 +27,10 @@ class SearchService
       }
       return results.flatten
     else
-  # byebug
       narrow_class = get_table_name(params["narrow_by"])
       narrow_record = narrow_class.search(params['narrow_query']).pop
-      song_ids=narrow_record.songs.pluck(:id)
-      return Song.find(song_ids).select{|song|
+      matching_ids=narrow_record.songs.pluck(:id)
+      return Song.find(matching_ids).select{|song|
         song.name.downcase.include?(params["query_string"])
       }
     end
