@@ -27,6 +27,7 @@ class SearchService
       }
       return results.flatten
     else
+      base = params["narrow_by"]
 
 
 

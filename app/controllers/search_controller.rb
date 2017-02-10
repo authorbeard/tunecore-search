@@ -6,7 +6,6 @@ class SearchController < ApplicationController
   end
 
   def search
-    # byebug
     redirect_to home_path, status: 400 and return if search_params.empty?
     search=SearchService.new
     search_results = search.send(search_params["search_opts"], search_params)
@@ -19,6 +18,7 @@ class SearchController < ApplicationController
   def search_params
     params.require(:q).permit(:query_string, :narrow_by, :narrow_query, :search_opts, :includes=>[])
   end
+
 
 
 end
