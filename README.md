@@ -3,8 +3,8 @@
 This is a simple Rails app to return a list of songs matching a keyword search. 
 
 ##Installation
-*This uses Rails 5 and Bootstrap 4 with standard-issue jQuery. 
-*It also has a number of seeds set up, though these don't look much like music names because they use Faker::Commerce product names. Try searching for "Cotton" or "Copper". I found this amusing for some reason.
+* This uses Rails 5 and Bootstrap 4 with standard-issue jQuery. 
+* It also has a number of seeds set up, though these don't look much like music names because they use Faker::Commerce product names. Try searching for "Cotton" or "Copper". I found this amusing for some reason.
 *Fork/clone then bundle install and you should be good to go.
 *rake db:seed will set up the database for you if you want to test-drive it. 
 *For proper testing, just type "rspec" and it'll fire off. It will probably take awhile.  
