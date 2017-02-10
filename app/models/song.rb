@@ -4,4 +4,6 @@ class Song < ApplicationRecord
 
   extend Searchable
 
+
+
 end

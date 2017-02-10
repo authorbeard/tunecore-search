@@ -6,16 +6,10 @@ class SearchService
 
   def default(params)
     query = params["query_string"]
-    artists=Artist.search(query)
-    albums=Album.search(query)
-    songs=Song.search(query)
-    return_hash = {
-      "songs": songs, 
-      "albums": albums,
-      "artists": artists
-    }
-    # return return_hash
-    return [songs, albums, artists].flatten
+    songs_from_artists = Artist.song_ids(query)
+    songs_from_albums = Album.song_ids(query)
+    songs=Song.search(query) << Song.find(songs_from_albums, songs_from_artists)
+    return songs.flatten
   end
 
   def custom(params)
