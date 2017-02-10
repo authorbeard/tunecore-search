@@ -24,6 +24,6 @@ function attachListeners(){
   $('input[value=custom]').change(displaySearchOpts);
   $('input[value=default]').change(hideSearchOpts);
   $('div#inclusive-search input[type=checkbox]').click(clearNarrowed);
-  $('input#narrow-query-string').keydown(clearInclusive);
+  $('div#narrowed-search input').change(clearInclusive);
   $('form').submit(tunecoreSearch);
 }
