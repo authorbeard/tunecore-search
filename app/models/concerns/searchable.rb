@@ -11,6 +11,10 @@ module Searchable
     return combined_results.flatten
   end
 
+  def song_ids(query_string)
+    return search(query_string).map{|a| a.songs.pluck(:id)}.flatten 
+  end
+
   def narrow_search(query)
 
   end

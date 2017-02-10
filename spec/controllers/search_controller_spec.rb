@@ -46,7 +46,7 @@ RSpec.describe SearchController do
 
       post :search, params: {:q=> {:search_opts=>"default", :query_string => "dream"}}, :format=>:json
       results = JSON.parse(response.body)
-# byebug
+
       expect(results.length).to eq(2)
       expect(results.all?{|song| song["name"].downcase.include?("dream")}).to be(false)
     end
