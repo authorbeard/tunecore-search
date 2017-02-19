@@ -5,7 +5,15 @@ class SearchService
   end
 
   def default(params)
-    query = params["query_string"]
+  byebug
+      query = params["query_string"]
+
+    # songs = Song.joins(:album, :artist)
+    #             .where('songs.name LIKE :q OR
+    #                     albums.name LIKE :q OR
+    #                     artists.name LIKE :q', q: "%#{query}%")
+    # return songs            
+
     songs_from_artists = Artist.matching_song_ids(query)
     songs_from_albums = Album.matching_song_ids(query)
 
